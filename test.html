@@ -296,34 +296,28 @@
       font-size: 0.9em;
     }
 
-    .not-before, .interrupted-indicator {
+    .status-box {
       float: right;
       font-size: 0.85em;
       padding: 2px 6px;
       border-radius: 6px;
       font-weight: bold;
-      background: #333;
-      color: #ffdd57;
-    }
-  
-    body.dark .not-before {
-      background: #333;
-      color: #ffdd57;
     }
 
-    body.light .not-before {
+    body.dark .status-box {
+      background: #333;
+    }
+
+    body.light .status-box {
       background: #eee;
-      color: #a66c00;
     }
 
-    body.dark .interrupted-indicator {
-      background: #4a235a; /* Dark purple */
-      color: #d0aaff; /* Light purple */
+    body.dark .match.upcoming .status-box {
+      color: #ffdd57; /* yellow for dark mode */
     }
 
-    body.light .interrupted-indicator {
-      background: #e8daef; /* Light purple */
-      color: #6b2fb3; /* Dark purple */
+    body.light .match.upcoming .status-box {
+      color: #a66c00; /* brown for light mode */
     }
 
     #schedule {
@@ -767,7 +761,7 @@
     }
 
     // Court rendering logic
-    const API_BASE = "https://tennis.ngrok.app/schedule.json";
+    const API_BASE = "https://checkerboard-mvjjwq23r-kaylee-craggs-projects.vercel.app/schedule";
     const savedCourts = localStorage.getItem('selectedCourts');
     let selectedCourts = new Set(savedCourts ? JSON.parse(savedCourts) : []);
     const isFirstLoad = !savedCourts;
@@ -871,16 +865,31 @@
           else if (['finished','ended','cancelled'].includes(m.status)) statusClass = 'finished';
           else if (m.status === 'interrupted') statusClass = 'interrupted';
           d.className = `match ${statusClass}`;
-          
           let txt = '';
           
-          // Status indicators
-          if (m.status === 'interrupted') {
-            txt += `<div class="interrupted-indicator">Interrupted</div>`;
+          // Status box for in_progress, interrupted, and not_before
+          if (m.status === 'in_progress' && m.duration !== undefined) {
+            // Convert duration to HH:MM format
+            if (m.duration / 60 >= 1) {
+              const hours = Math.floor(m.duration / 60);
+              const minutes = m.duration % 60;
+              const durationStr = `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+              txt += `<div class="status-box">${durationStr}</div>`;
+            }
+            else {
+              const hours = Math.floor(m.duration / 60);
+              const minutes = m.duration % 60;
+              const durationStr = `${minutes.toString().padStart(2, '0')}m`;
+              txt += `<div class="status-box">${durationStr}</div>`;
+            }
+              
+          } 
+          else if (m.status === 'interrupted') {
+            txt += `<div class="status-box">interrupted</div>`;
           }
-          else if (m.status === 'not_started' && m.notBefore) {
-            const aestTime = convertParisTimeToAEST(m.notBefore);
-            txt += `<div class="not-before">Not before ${aestTime} AEST</div>`;
+
+          else if (m.status === 'not_started' && m.notBeforeAEST) {
+            txt += `<div class="status-box">Not before ${m.notBeforeAEST} AEST</div>`;
           }
           
           if (m.typeLabel) {
@@ -895,34 +904,28 @@
             }).join(' / ');
           };
           
-          // Always show player names in a table format
-          // txt += `<table class="score-table">`;
-          // txt += `<tr><td class="player-name">${formatTeam(m.home, m.seedA)}</td></tr>`;
-          // txt += `<tr><td class="player-name">${formatTeam(m.away, m.seedB)}</td></tr>`;
-          // txt += `</table>`;
-          
-          // Show scores only for matches that are in progress or finished
-          if (m.score && m.status !== 'not_started' && m.status !== 'interrupted') {
+          if (m.score) {
             // Determine if we should hide current game
             const hideCurrentGame = ['finished', 'ended'].includes(m.status);
             const tableClass = hideCurrentGame ? "score-table no-current-game" : "score-table";
             
             txt += `<table class="${tableClass}">`;
             
-            // Home player row with scores
+            // Home player row
             txt += `<tr>`;
-            txt += `<td class="player-name">${formatTeam(m.home, '')}</td>`;
+            txt += `<td class="player-name">${formatTeam(m.home, m.seedA)}</td>`;
             m.score.sets.home.forEach(score => {
               txt += `<td class="set-score">${score}</td>`;
             });
+            // Only show current game if match isn't finished/ended
             if (!hideCurrentGame) {
               txt += `<td class="current-game">${m.score.current.home}</td>`;
             }
             txt += `</tr>`;
             
-            // Away player row with scores
+            // Away player row
             txt += `<tr>`;
-            txt += `<td class="player-name">${formatTeam(m.away, '')}</td>`;
+            txt += `<td class="player-name">${formatTeam(m.away, m.seedB)}</td>`;
             m.score.sets.away.forEach(score => {
               txt += `<td class="set-score">${score}</td>`;
             });
@@ -996,25 +999,6 @@
       const today = new Date(ty, tm - 1, td);
       const match = new Date(my, mm - 1, md);
       return (match - today) / (1000 * 60 * 60 * 24) === 1;
-    }
-
-    function convertParisTimeToAEST(parisTimeStr) {
-      const [hour, minute] = parisTimeStr.split(':').map(Number);
-      const parisNow = new Date();
-      const parisDateStr = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'Europe/Paris',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      }).format(parisNow);
-      const parisDateTimeISO = `${parisDateStr}T${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:00`;
-      const dateInParis = new Date(`${parisDateTimeISO}+02:00`);
-      return dateInParis.toLocaleTimeString('en-AU', {
-        timeZone: 'Australia/Sydney',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      });
     }
 
     checkForUpdate();
