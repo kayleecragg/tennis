@@ -761,7 +761,7 @@
     }
 
     // Court rendering logic
-    const API_BASE = "https://checkerboard-eta.vercel.app/";
+    const API_BASE = "https://wb-checkerboard.vercel.app/";
     const savedCourts = localStorage.getItem('selectedCourts');
     let selectedCourts = new Set(savedCourts ? JSON.parse(savedCourts) : []);
     const isFirstLoad = !savedCourts;
@@ -965,11 +965,11 @@
             if (p.court !== c) {
               changed.add(p.court);
               changed.add(c);
-              addNotification(`Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`);
+              addNotification(`COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`);
             }
             if (p.home !== m.home || p.away !== m.away) {
               changed.add(c);
-              addNotification(`Player change on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`);
+              addNotification(`PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`);
             }
           }
         }));
