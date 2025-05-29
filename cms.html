@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cms notifs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link rel="preload" href="/_app/immutable/assets/ibm-plex-mono-latin-400-normal.Dm_PoFIZ.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/_app/immutable/assets/noto-sans-mono-latin-wght-normal.sn4KHCQi.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    :root {
+      --primary: #121212;
+      --secondary: #ffffff;
+      --gray: #999999;
+      --notification-bg: #121212;
+      --notification-border: #ffffff;
+      --border-radius: 10px;
+      --padding: 12px;
+      --font-mono: 'IBM Plex Mono', 'Noto Sans Mono Variable', monospace;
+    }
+
+    @font-face {
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('/_app/immutable/assets/ibm-plex-mono-latin-400-normal.Dm_PoFIZ.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Noto Sans Mono Variable';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('/_app/immutable/assets/noto-sans-mono-latin-wght-normal.sn4KHCQi.woff2') format('woff2-variations');
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    body {
+      background: var(--primary);
+      color: var(--secondary);
+      margin: 0;
+      padding: var(--padding);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    #notifications {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 10px;
+      overflow-y: auto;
+      max-height: 85vh;
+      padding-right: 4px;
+    }
+
+    .notification {
+      background-color: var(--notification-bg);
+      border-left: 4px solid var(--notification-border);
+      padding: 10px 14px;
+      border-radius: var(--border-radius);
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
+    }
+
+    .notification.new {
+      animation: fadeSlideIn 0.4s ease-out;
+    }
+
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>cms notifications</h2>
+  <div id="notifications"></div>
+
+  <script>
+    const API_URL = 'https://tennis.ngrok.app/schedule.json';
+    const MAX_NOTIFICATIONS = 20;
+
+    let previousData = {};
+    let notificationLog = JSON.parse(localStorage.getItem("notifs") || "[]");
+
+    function formatName(name) {
+      // Extract the last name (assuming format like "Firstname.Lastname")
+      if (!name.includes('.')) return name;
+
+      let lastName = name.split('.')[1].trim();
+
+      // Handle prefixes that should remain lowercase
+      const lowercasePrefixes = ['de', 'van'];
+      const words = lastName.split(' ');
+
+      const formattedWords = words.map((word, index) => {
+        if (index === 0 && lowercasePrefixes.includes(word.toLowerCase())) {
+          return word.toLowerCase(); // keep prefix lowercase
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); // Capitalize others
+      });
+
+      return formattedWords.join(' ');
+    }
+
+
+    function getMatchById(data, id) {
+      for (const matches of Object.values(data)) {
+        for (const match of matches) {
+          if (match.id === id) return match;
+        }
+      }
+      return null;
+    }
+
+    function getMatchLabel(match) {
+      const label = match.typeLabel || '';
+      const round = match.round || '';
+      return `${label}${label && round ? ' ' : ''}${round}`;
+    }
+
+    function loadStoredNotifications() {
+      const container = document.getElementById('notifications');
+      notificationLog.forEach(msg => {
+        addNotification(msg, false);  // Don't animate stored notifs
+      });
+    }
+
+    function addNotification(message, isNew = true) {
+      const container = document.getElementById('notifications');
+      const div = document.createElement('div');
+      div.className = 'notification';
+      if (isNew) div.classList.add('new');
+      div.textContent = message;
+      container.appendChild(div);
+
+      notificationLog.push(message);
+      if (notificationLog.length > MAX_NOTIFICATIONS) {
+        notificationLog.shift();
+        container.removeChild(container.firstChild);
+      }
+
+      localStorage.setItem("notifs", JSON.stringify(notificationLog));
+    }
+
+    async function fetchData() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        if (!Object.keys(previousData).length) {
+          previousData = data;
+          return;
+        }
+
+        for (const [court, matches] of Object.entries(data)) {
+          for (const match of matches) {
+            const matchId = match.id;
+            const prevMatch = getMatchById(previousData, matchId);
+            if (!prevMatch) continue;
+
+            const home = formatName(match.home);
+            const away = formatName(match.away);
+            const label = getMatchLabel(match);
+
+            if (match.court !== prevMatch.court) {
+              addNotification(`COURT CHANGE: ${home} vs ${away} moved from ${prevMatch.court} to ${match.court}`);
+            }
+
+            if (match.home !== prevMatch.home || match.away !== prevMatch.away) {
+              addNotification(`PLAYER CHANGE: Before: ${formatName(prevMatch.home)} vs ${formatName(prevMatch.away)} — Now: ${home} vs ${away}`);
+            }
+
+            if (prevMatch.status === 'in_progress' && match.status === 'finished') {
+              const players = match.playersA.concat(match.playersB);
+              const ausPlayer = players.some(p => p.country === 'AUS');
+
+              if (ausPlayer) {
+                addNotification(`AUS MATCH ENDED: ${home} vs ${away} - ${label} Roland Garros 2025`);
+              }
+
+              if (['Court Philippe-Chatrier', 'Court Suzanne-Lenglen'].includes(match.court)) {
+                addNotification(`4K MATCH FINISHED: ${home} vs ${away} - ${label} Roland Garros 2025`);
+              }
+            }
+          }
+        }
+
+        previousData = data;
+      } catch (err) {
+        console.error('Fetch error:', err);
+      }
+    }
+
+    loadStoredNotifications();
+    fetchData();
+    setInterval(fetchData, 10000);
+  </script>
+</body>
+</html>
