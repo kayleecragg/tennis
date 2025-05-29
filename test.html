@@ -896,10 +896,10 @@
           };
           
           // Always show player names in a table format
-          txt += `<table class="score-table">`;
-          txt += `<tr><td class="player-name">${formatTeam(m.home, m.seedA)}</td></tr>`;
-          txt += `<tr><td class="player-name">${formatTeam(m.away, m.seedB)}</td></tr>`;
-          txt += `</table>`;
+          // txt += `<table class="score-table">`;
+          // txt += `<tr><td class="player-name">${formatTeam(m.home, m.seedA)}</td></tr>`;
+          // txt += `<tr><td class="player-name">${formatTeam(m.away, m.seedB)}</td></tr>`;
+          // txt += `</table>`;
           
           // Show scores only for matches that are in progress or finished
           if (m.score && m.status !== 'not_started' && m.status !== 'interrupted') {
@@ -907,7 +907,6 @@
             const hideCurrentGame = ['finished', 'ended'].includes(m.status);
             const tableClass = hideCurrentGame ? "score-table no-current-game" : "score-table";
             
-            txt += `<div class="score-header">Sets & Current Game</div>`;
             txt += `<table class="${tableClass}">`;
             
             // Home player row with scores
