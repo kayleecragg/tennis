@@ -296,7 +296,7 @@
       font-size: 0.9em;
     }
 
-    .not-before {
+    .not-before, .interrupted-indicator {
       float: right;
       font-size: 0.85em;
       padding: 2px 6px;
@@ -305,10 +305,25 @@
       background: #333;
       color: #ffdd57;
     }
+  
+    body.dark .not-before {
+      background: #333;
+      color: #ffdd57;
+    }
 
     body.light .not-before {
       background: #eee;
       color: #a66c00;
+    }
+
+    body.dark .interrupted-indicator {
+      background: #4a235a; /* Dark purple */
+      color: #d0aaff; /* Light purple */
+    }
+
+    body.light .interrupted-indicator {
+      background: #e8daef; /* Light purple */
+      color: #6b2fb3; /* Dark purple */
     }
 
     #schedule {
@@ -856,11 +871,18 @@
           else if (['finished','ended','cancelled'].includes(m.status)) statusClass = 'finished';
           else if (m.status === 'interrupted') statusClass = 'interrupted';
           d.className = `match ${statusClass}`;
+          
           let txt = '';
-          if (m.status === 'not_started' && m.notBefore) {
+          
+          // Status indicators
+          if (m.status === 'interrupted') {
+            txt += `<div class="interrupted-indicator">Interrupted</div>`;
+          }
+          else if (m.status === 'not_started' && m.notBefore) {
             const aestTime = convertParisTimeToAEST(m.notBefore);
             txt += `<div class="not-before">Not before ${aestTime} AEST</div>`;
           }
+          
           if (m.typeLabel) {
             const roundText = m.round ? `<span style="color:#999;font-weight:normal"> (${m.round})</span>` : '';
             txt += `<div class="type-label">${m.typeLabel}${roundText}</div>`;
@@ -873,28 +895,35 @@
             }).join(' / ');
           };
           
-          if (m.score) {
+          // Always show player names in a table format
+          txt += `<table class="score-table">`;
+          txt += `<tr><td class="player-name">${formatTeam(m.home, m.seedA)}</td></tr>`;
+          txt += `<tr><td class="player-name">${formatTeam(m.away, m.seedB)}</td></tr>`;
+          txt += `</table>`;
+          
+          // Show scores only for matches that are in progress or finished
+          if (m.score && m.status !== 'not_started' && m.status !== 'interrupted') {
             // Determine if we should hide current game
             const hideCurrentGame = ['finished', 'ended'].includes(m.status);
             const tableClass = hideCurrentGame ? "score-table no-current-game" : "score-table";
             
+            txt += `<div class="score-header">Sets & Current Game</div>`;
             txt += `<table class="${tableClass}">`;
             
-            // Home player row
+            // Home player row with scores
             txt += `<tr>`;
-            txt += `<td class="player-name">${formatTeam(m.home, m.seedA)}</td>`;
+            txt += `<td class="player-name">${formatTeam(m.home, '')}</td>`;
             m.score.sets.home.forEach(score => {
               txt += `<td class="set-score">${score}</td>`;
             });
-            // Only show current game if match isn't finished/ended
             if (!hideCurrentGame) {
               txt += `<td class="current-game">${m.score.current.home}</td>`;
             }
             txt += `</tr>`;
             
-            // Away player row
+            // Away player row with scores
             txt += `<tr>`;
-            txt += `<td class="player-name">${formatTeam(m.away, m.seedB)}</td>`;
+            txt += `<td class="player-name">${formatTeam(m.away, '')}</td>`;
             m.score.sets.away.forEach(score => {
               txt += `<td class="set-score">${score}</td>`;
             });
