@@ -868,7 +868,7 @@
           let txt = '';
           
           // Status box for in_progress, interrupted, and not_before
-          if (m.status === 'in_progress' && m.duration !== undefined) {
+          if ((m.status === 'in_progress') || (m.status === 'finished') && m.duration !== undefined) {
             // Convert duration to HH:MM format
             if (m.duration / 60 >= 1) {
               const hours = Math.floor(m.duration / 60);
