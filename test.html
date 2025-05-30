@@ -677,11 +677,11 @@
     
     // Apply saved settings
     body.classList.remove('light', 'dark', 'font-lato', 'font-monospace');
-    body.classList.add(savedTheme, font-${savedFont});
+    body.classList.add(savedTheme, `font-${savedFont}`);
     
     // Update active buttons
-    document.querySelector([data-theme="${savedTheme}"]).classList.add('active');
-    document.querySelector([data-font="${savedFont}"]).classList.add('active');
+    document.querySelector(`[data-theme="${savedTheme}"]`).classList.add('active');
+    document.querySelector(`[data-font="${savedFont}"]`).classList.add('active');
     
     // Toggle settings modal
     settingsButton.addEventListener('click', () => {
@@ -724,7 +724,7 @@
         localStorage.setItem('theme', theme);
         
         // Show confirmation
-        showSettingsStatus(theme set to ${theme} mode);
+        showSettingsStatus(`theme set to ${theme} mode`);
       });
     });
     
@@ -741,18 +741,18 @@
         // Remove existing font classes
         body.classList.remove('font-lato', 'font-monospace');
         // Add selected font class
-        body.classList.add(font-${font});
+        body.classList.add(`font-${font}`);
         
         // Save to localStorage
         localStorage.setItem('font', font);
         
         // Show confirmation
-        showSettingsStatus(Font set to ${font});
+        showSettingsStatus(`Font set to ${font}`);
       });
     });
     
     function showSettingsStatus(message) {
-      settingsStatus.textContent = ${message} - saved to browser storage;
+      settingsStatus.textContent = `${message} - saved to browser storage`;
       settingsStatus.style.color = '#4CAF50';
       setTimeout(() => {
         settingsStatus.textContent = "settings are saved in your browser's local storage";
@@ -782,7 +782,7 @@
       }
       document.getElementById('notifications').innerHTML = notifications
         .slice(-10)
-        .map(n => <div>${new Date(n.timestamp).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}: ${n.message}</div>)
+        .map(n => `<div>${new Date(n.timestamp).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}: ${n.message}</div>`)
         .join('');
       showPopup(message);
     }
@@ -861,14 +861,14 @@
         const div = document.createElement('div');
         div.className = 'court';
         div.dataset.court = court;
-        div.innerHTML = <h2>${court}</h2>;
+        div.innerHTML = `<h2>${court}</h2>`;
         matches.forEach(m => {
           const d = document.createElement('div');
           let statusClass = 'upcoming';
           if (m.status === 'in_progress') statusClass = 'live';
           else if (['finished','ended','cancelled'].includes(m.status)) statusClass = 'finished';
           else if (m.status === 'interrupted') statusClass = 'interrupted';
-          d.className = match ${statusClass};
+          d.className = `match ${statusClass}`;
           let txt = '';
           
           // Status box for in_progress, interrupted, and not_before
@@ -877,34 +877,34 @@
             if (m.duration / 60 >= 1) {
               const hours = Math.floor(m.duration / 60);
               const minutes = m.duration % 60;
-              const durationStr = ${hours}h ${minutes.toString().padStart(2, '0')}m;
-              txt += <div class="status-box">${durationStr}</div>;
+              const durationStr = `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+              txt += `<div class="status-box">${durationStr}</div>`;
             }
             else {
               const hours = Math.floor(m.duration / 60);
               const minutes = m.duration % 60;
-              const durationStr = ${minutes.toString().padStart(2, '0')}m;
-              txt += <div class="status-box">${durationStr}</div>;
+              const durationStr = `${minutes.toString().padStart(2, '0')}m`;
+              txt += `<div class="status-box">${durationStr}</div>`;
             }
               
           } 
           else if (m.status === 'interrupted') {
-            txt += <div class="status-box">interrupted</div>;
+            txt += `<div class="status-box">interrupted</div>`;
           }
 
           else if (m.status === 'not_started' && m.notBeforeAEST) {
-            txt += <div class="status-box">Not before ${m.notBeforeAEST} AEST</div>;
+            txt += `<div class="status-box">Not before ${m.notBeforeAEST} AEST</div>`;
           }
           
           if (m.typeLabel) {
-            const roundText = m.round ? <span style="color:#999;font-weight:normal"> (${m.round})</span> : '';
-            txt += <div class="type-label">${m.typeLabel}${roundText}</div>;
+            const roundText = m.round ? `<span style="color:#999;font-weight:normal"> (${m.round})</span>` : '';
+            txt += `<div class="type-label">${m.typeLabel}${roundText}</div>`;
           }
           
           // Format team with seed
           const formatTeam = (team, seed) => {
             return team.split(' / ').map(name => {
-              return ${name}${seed ? <span class="seed">(${seed})</span> : ''};
+              return `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`;
             }).join(' / ');
           };
           
@@ -917,48 +917,48 @@
             const awayCountry = m.playersB[0]?.country;
 
             
-            txt += <table class="${tableClass}">;
+            txt += `<table class="${tableClass}">`;
             
             // Home player row
-            txt += <tr>;
-            txt += 
+            txt += `<tr>`;
+            txt += `
               <td class="player-name">
                 ${ countryFlag(homeCountry) }
                 ${ formatTeam(m.home, m.seedA) }
               </td>
-            ;
+            `;
             m.score.sets.home.forEach(score => {
-              txt += <td class="set-score">${score}</td>;
+              txt += `<td class="set-score">${score}</td>`;
             });
             if (!hideCurrentGame) {
-              txt += <td class="current-game">${m.score.current.home}</td>;
+              txt += `<td class="current-game">${m.score.current.home}</td>`;
             }
-            txt += </tr>;
+            txt += `</tr>`;
         
             // Away player row
-            txt += <tr>;
-            txt += 
+            txt += `<tr>`;
+            txt += `
               <td class="player-name">
                 ${ countryFlag(awayCountry) }
                 ${ formatTeam(m.away, m.seedB) }
               </td>
-            ;
+            `;
             m.score.sets.away.forEach(score => {
-              txt += <td class="set-score">${score}</td>;
+              txt += `<td class="set-score">${score}</td>`;
             });
             if (!hideCurrentGame) {
-              txt += <td class="current-game">${m.score.current.away}</td>;
+              txt += `<td class="current-game">${m.score.current.away}</td>`;
             }
-            txt += </tr>;
+            txt += `</tr>`;
         
-          txt += </table>;
+          txt += `</table>`;
         }
           
           if (m.status === 'finished' && m.endTime) {
             const endDate = new Date(m.endTime);
             const options = { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit' };
             const timeStr = endDate.toLocaleTimeString('en-AU', options);
-            txt += <div class="score-endtime">Ended at: ${timeStr} AEST</div>;
+            txt += `<div class="score-endtime">Ended at: ${timeStr} AEST</div>`;
           }
           
           d.innerHTML = txt;
@@ -982,11 +982,11 @@
             if (p.court !== c) {
               changed.add(p.court);
               changed.add(c);
-              addNotification(COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c});
+              addNotification(`COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`);
             }
             if (p.home !== m.home || p.away !== m.away) {
               changed.add(c);
-              addNotification(PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away});
+              addNotification(`PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`);
             }
           }
         }));
@@ -996,7 +996,7 @@
         if (!selectorsInitialized) initSelectors(Object.keys(data));
         render(filterData(data));
         changed.forEach(c => {
-          const el = document.querySelector(.court[data-court="${c}"]);
+          const el = document.querySelector(`.court[data-court="${c}"]`);
           if (el) {
             el.classList.add('flash');
             setTimeout(() => el.classList.remove('flash'), 1500);
