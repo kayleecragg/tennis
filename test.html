@@ -760,10 +760,6 @@
       }, 3000);
     }
 
-
-    function countryFlag(code) {
-      return code === "AUS" ? "🇦🇺 " : "";
-    }
     // Court rendering logic
     const API_BASE = "https://rg-checkerboard.vercel.app/";
     const savedCourts = localStorage.getItem('selectedCourts');
@@ -902,17 +898,13 @@
           }
           
           // Format team with seed and aussie country
-          // const formatTeam = (team, seed) => {
-          //   return team.split(' / ').map(name => {
-          //     return `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`;
-          //   }).join(' / ');
-          // };
-
+          
           function formatTeam(teamString, seed, players) {
             return teamString
               .split(' / ')
               .map((displayName, idx) => {
                 const country = players[idx]?.country;
+                // only this player gets a flag if they’re AUS
                 const flag    = country === 'AUS' ? '🇦🇺 ' : '';
                 const seeded  = seed ? `<span class="seed">(${seed})</span>` : '';
                 return `${flag}${displayName}${seeded}`;
