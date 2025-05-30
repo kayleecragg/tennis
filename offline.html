@@ -296,19 +296,28 @@
       font-size: 0.9em;
     }
 
-    .not-before {
+    .status-box {
       float: right;
       font-size: 0.85em;
       padding: 2px 6px;
       border-radius: 6px;
       font-weight: bold;
-      background: #333;
-      color: #ffdd57;
     }
 
-    body.light .not-before {
+    body.dark .status-box {
+      background: #333;
+    }
+
+    body.light .status-box {
       background: #eee;
-      color: #a66c00;
+    }
+
+    body.dark .match.upcoming .status-box {
+      color: #ffdd57; /* yellow for dark mode */
+    }
+
+    body.light .match.upcoming .status-box {
+      color: #a66c00; /* brown for light mode */
     }
 
     #schedule {
@@ -648,7 +657,7 @@
   <div id="offline-message">
     <img src="assets/aaa.gif" alt="aaa" class="logo">
     <h1>checkerboard offline.</h1>
-    <p>contact kaylee (reasons: wifi down, kaylee's laptop is shut, or blame blake)</p>
+    <p>contact kaylee (reasons: the office wifi's down (client issue im hosting on vercel now) or blame blake)</p>
   </div>
 
 
@@ -752,7 +761,7 @@
     }
 
     // Court rendering logic
-    const API_BASE = "schedule.json";
+    const API_BASE = "/schedule";
     const savedCourts = localStorage.getItem('selectedCourts');
     let selectedCourts = new Set(savedCourts ? JSON.parse(savedCourts) : []);
     const isFirstLoad = !savedCourts;
@@ -857,10 +866,32 @@
           else if (m.status === 'interrupted') statusClass = 'interrupted';
           d.className = `match ${statusClass}`;
           let txt = '';
-          if (m.status === 'not_started' && m.notBefore) {
-            const aestTime = convertParisTimeToAEST(m.notBefore);
-            txt += `<div class="not-before">Not before ${aestTime} AEST</div>`;
+          
+          // Status box for in_progress, interrupted, and not_before
+          if ((m.status === 'in_progress') || (m.status === 'finished') && m.duration !== undefined) {
+            // Convert duration to HH:MM format
+            if (m.duration / 60 >= 1) {
+              const hours = Math.floor(m.duration / 60);
+              const minutes = m.duration % 60;
+              const durationStr = `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+              txt += `<div class="status-box">${durationStr}</div>`;
+            }
+            else {
+              const hours = Math.floor(m.duration / 60);
+              const minutes = m.duration % 60;
+              const durationStr = `${minutes.toString().padStart(2, '0')}m`;
+              txt += `<div class="status-box">${durationStr}</div>`;
+            }
+              
+          } 
+          else if (m.status === 'interrupted') {
+            txt += `<div class="status-box">interrupted</div>`;
           }
+
+          else if (m.status === 'not_started' && m.notBeforeAEST) {
+            txt += `<div class="status-box">Not before ${m.notBeforeAEST} AEST</div>`;
+          }
+          
           if (m.typeLabel) {
             const roundText = m.round ? `<span style="color:#999;font-weight:normal"> (${m.round})</span>` : '';
             txt += `<div class="type-label">${m.typeLabel}${roundText}</div>`;
@@ -934,11 +965,11 @@
             if (p.court !== c) {
               changed.add(p.court);
               changed.add(c);
-              addNotification(`Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`);
+              addNotification(`COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`);
             }
             if (p.home !== m.home || p.away !== m.away) {
               changed.add(c);
-              addNotification(`Player change on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`);
+              addNotification(`PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`);
             }
           }
         }));
@@ -968,25 +999,6 @@
       const today = new Date(ty, tm - 1, td);
       const match = new Date(my, mm - 1, md);
       return (match - today) / (1000 * 60 * 60 * 24) === 1;
-    }
-
-    function convertParisTimeToAEST(parisTimeStr) {
-      const [hour, minute] = parisTimeStr.split(':').map(Number);
-      const parisNow = new Date();
-      const parisDateStr = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'Europe/Paris',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      }).format(parisNow);
-      const parisDateTimeISO = `${parisDateStr}T${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:00`;
-      const dateInParis = new Date(`${parisDateTimeISO}+02:00`);
-      return dateInParis.toLocaleTimeString('en-AU', {
-        timeZone: 'Australia/Sydney',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      });
     }
 
     checkForUpdate();
