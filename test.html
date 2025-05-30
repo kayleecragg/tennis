@@ -901,12 +901,24 @@
             txt += `<div class="type-label">${m.typeLabel}${roundText}</div>`;
           }
           
-          // Format team with seed
-          const formatTeam = (team, seed) => {
-            return team.split(' / ').map(name => {
-              return `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`;
-            }).join(' / ');
-          };
+          // Format team with seed and aussie country
+          // const formatTeam = (team, seed) => {
+          //   return team.split(' / ').map(name => {
+          //     return `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`;
+          //   }).join(' / ');
+          // };
+
+          function formatTeam(teamString, seed, players) {
+            return teamString
+              .split(' / ')
+              .map((displayName, idx) => {
+                const country = players[idx]?.country;
+                const flag    = country === 'AUS' ? '🇦🇺 ' : '';
+                const seeded  = seed ? `<span class="seed">(${seed})</span>` : '';
+                return `${flag}${displayName}${seeded}`;
+              })
+              .join(' / ');
+          }
           
           if (m.score) {
             // Determine if we should hide current game
@@ -923,8 +935,7 @@
             txt += `<tr>`;
             txt += `
               <td class="player-name">
-                ${ countryFlag(homeCountry) }
-                ${ formatTeam(m.home, m.seedA) }
+                ${ formatTeam(m.home, m.seedA, m.playersB) }
               </td>
             `;
             m.score.sets.home.forEach(score => {
@@ -939,8 +950,7 @@
             txt += `<tr>`;
             txt += `
               <td class="player-name">
-                ${ countryFlag(awayCountry) }
-                ${ formatTeam(m.away, m.seedB) }
+                ${ formatTeam(m.away, m.seedB, m.playersB) }
               </td>
             `;
             m.score.sets.away.forEach(score => {
