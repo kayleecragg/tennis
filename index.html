@@ -760,6 +760,10 @@
       }, 3000);
     }
 
+
+    function countryFlag(code) {
+      return code === "AUS" ? "🇦🇺 " : "";
+    }
     // Court rendering logic
     const API_BASE = "https://rg-checkerboard.vercel.app/";
     const savedCourts = localStorage.getItem('selectedCourts');
@@ -908,24 +912,37 @@
             // Determine if we should hide current game
             const hideCurrentGame = ['finished', 'ended'].includes(m.status);
             const tableClass = hideCurrentGame ? "score-table no-current-game" : "score-table";
+
+            const homeCountry = m.playersA[0]?.country;
+            const awayCountry = m.playersB[0]?.country;
+
             
             txt += `<table class="${tableClass}">`;
             
             // Home player row
             txt += `<tr>`;
-            txt += `<td class="player-name">${formatTeam(m.home, m.seedA)}</td>`;
+            txt += `
+              <td class="player-name">
+                ${ countryFlag(homeCountry) }
+                ${ formatTeam(m.home, m.seedA) }
+              </td>
+            `;
             m.score.sets.home.forEach(score => {
               txt += `<td class="set-score">${score}</td>`;
             });
-            // Only show current game if match isn't finished/ended
             if (!hideCurrentGame) {
               txt += `<td class="current-game">${m.score.current.home}</td>`;
             }
             txt += `</tr>`;
-            
+        
             // Away player row
             txt += `<tr>`;
-            txt += `<td class="player-name">${formatTeam(m.away, m.seedB)}</td>`;
+            txt += `
+              <td class="player-name">
+                ${ countryFlag(awayCountry) }
+                ${ formatTeam(m.away, m.seedB) }
+              </td>
+            `;
             m.score.sets.away.forEach(score => {
               txt += `<td class="set-score">${score}</td>`;
             });
@@ -933,9 +950,9 @@
               txt += `<td class="current-game">${m.score.current.away}</td>`;
             }
             txt += `</tr>`;
-            
-            txt += `</table>`;
-          }
+        
+          txt += `</table>`;
+        }
           
           if (m.status === 'finished' && m.endTime) {
             const endDate = new Date(m.endTime);
