@@ -657,7 +657,7 @@
   <div id="offline-message">
     <img src="assets/aaa.gif" alt="aaa" class="logo">
     <h1>checkerboard offline.</h1>
-    <p>contact kaylee (reasons: wifi down, kaylee's laptop is shut, or blame blake)</p>
+    <p>contact kaylee (reasons: the office wifi's down (client issue im hosting on vercel now) or blame blake)</p>
   </div>
 
 
@@ -761,7 +761,7 @@
     }
 
     // Court rendering logic
-    const API_BASE = "https://wb-checkerboard.vercel.app/";
+    const API_BASE = "https://rg-checkerboard.vercel.app/";
     const savedCourts = localStorage.getItem('selectedCourts');
     let selectedCourts = new Set(savedCourts ? JSON.parse(savedCourts) : []);
     const isFirstLoad = !savedCourts;
@@ -868,7 +868,7 @@
           let txt = '';
           
           // Status box for in_progress, interrupted, and not_before
-          if (m.status === 'in_progress' && m.duration !== undefined) {
+          if ((m.status === 'in_progress') || (m.status === 'finished') && m.duration !== undefined) {
             // Convert duration to HH:MM format
             if (m.duration / 60 >= 1) {
               const hours = Math.floor(m.duration / 60);
