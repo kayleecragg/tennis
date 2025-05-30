@@ -760,10 +760,21 @@
       }, 3000);
     }
 
-
-    function countryFlag(code) {
-      return code === "AUS" ? "🇦🇺 " : "";
+    function countryFlag(players) {
+      if (!players || players.length === 0) return "";
+      
+      // For doubles: if both players are Australian, show flag once
+      if (players.length === 2 && 
+          players[0].country === "AUS" && 
+          players[1].country === "AUS") {
+        return "🇦🇺 ";
+      }
+      
+      // For singles or when only one player is Australian
+      const ausPlayer = players.find(p => p.country === "AUS");
+      return ausPlayer ? "🇦🇺 " : "";
     }
+    
     // Court rendering logic
     const API_BASE = "https://rg-checkerboard.vercel.app/";
     const savedCourts = localStorage.getItem('selectedCourts');
@@ -923,7 +934,7 @@
             txt += `<tr>`;
             txt += `
               <td class="player-name">
-                ${ countryFlag(homeCountry) }
+                ${ countryFlag(m.players) }
                 ${ formatTeam(m.home, m.seedA) }
               </td>
             `;
@@ -939,7 +950,7 @@
             txt += `<tr>`;
             txt += `
               <td class="player-name">
-                ${ countryFlag(awayCountry) }
+                ${ countryFlag(playersB) }
                 ${ formatTeam(m.away, m.seedB) }
               </td>
             `;
