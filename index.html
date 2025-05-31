@@ -5,6 +5,7 @@
   <title>CHECKERBOARD</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
     /* Base styles */
@@ -482,33 +483,6 @@
       font-family: 'IBM Plex Mono', 'Noto Sans Mono Variable', monospace;
     }
   
-/*     .back-container {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-  
-    .back-button {
-      padding: 8px;
-      border-radius: 100%;
-      border: none;
-      background: none;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-  
-    .back-button:hover {
-      transform: scale(1.1);
-    }
-  
-    .back-button svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 2px;
-      stroke: #ccc;
-      fill: none;
-    } */
-  
     #offline-message img.logo {
       max-width: 200px;
       margin-bottom: 2rem;
@@ -575,6 +549,49 @@
       font-size: 0.8em;
       color: #999;
       margin-left: 4px;
+    }
+
+    /* Notification permission banner */
+    .notification-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 10000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid #444;
+      max-width: 90%;
+    }
+    
+    .notification-banner button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    
+    .notification-banner button:hover {
+      background: #45a049;
+    }
+    
+    .notification-banner .close-banner {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 1.2rem;
     }
 
     /* Remove border from last set column when no current game */
@@ -647,19 +664,20 @@
     <span id="popup-close">&times;</span>
     <div id="popup-content"></div>
   </div>
-<!--   <div class="back-container">
-    <a href="https://kayleecragg.github.io/tennis/checkerboard" class="back-button" aria-label="Go back">
-      <svg viewBox="0 0 24 24">
-        <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div> -->
+
   <div id="offline-message">
     <img src="assets/aaa.gif" alt="aaa" class="logo">
     <h1>checkerboard offline.</h1>
     <p>contact kaylee (reasons: the office wifi's down (client issue im hosting on vercel now) or blame blake)</p>
   </div>
 
+  <div id="notification-banner" class="notification-banner" style="display: none;">
+    <div>
+      <i class="fas fa-bell"></i> Enable desktop notifications to get alerts about court and player changes
+    </div>
+    <button id="enable-notifications">Enable</button>
+    <button class="close-banner">&times;</button>
+  </div>
 
   <script>
     // Settings functionality
@@ -760,10 +778,57 @@
       }, 3000);
     }
 
-
     function countryFlag(code) {
       return code === "AUS" ? "🇦🇺 " : "";
     }
+    
+    // Notification functionality
+    const notificationBanner = document.getElementById('notification-banner');
+    const enableNotificationsBtn = document.getElementById('enable-notifications');
+    const closeBannerBtn = document.querySelector('.close-banner');
+    
+    // Show notification banner if permission hasn't been requested
+    if ('Notification' in window && Notification.permission === 'default') {
+      setTimeout(() => {
+        notificationBanner.style.display = 'flex';
+      }, 3000);
+    }
+    
+    // Request notification permission
+    enableNotificationsBtn.addEventListener('click', () => {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          notificationBanner.style.display = 'none';
+          // Show a test notification
+          showDesktopNotification('Notifications Enabled', 'You will now receive alerts about court and player changes!');
+        }
+      });
+    });
+    
+    // Close notification banner
+    closeBannerBtn.addEventListener('click', () => {
+      notificationBanner.style.display = 'none';
+    });
+    
+    // Function to show desktop notification
+    function showDesktopNotification(title, body) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        const options = {
+          body: body,
+          icon: 'https://img.icons8.com/color/96/000000/tennis.png',
+          badge: 'https://img.icons8.com/color/96/000000/important-mail.png'
+        };
+        
+        // Create notification
+        const notification = new Notification(title, options);
+        
+        // Close notification after 5 seconds
+        setTimeout(() => {
+          notification.close();
+        }, 5000);
+      }
+    }
+    
     // Court rendering logic
     const API_BASE = "https://rg-checkerboard.vercel.app/";
     const savedCourts = localStorage.getItem('selectedCourts');
@@ -982,11 +1047,17 @@
             if (p.court !== c) {
               changed.add(p.court);
               changed.add(c);
-              addNotification(`COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`);
+              const message = `COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`;
+              addNotification(message);
+              // Show desktop notification
+              showDesktopNotification('Court Change', message);
             }
             if (p.home !== m.home || p.away !== m.away) {
               changed.add(c);
-              addNotification(`PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`);
+              const message = `PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`;
+              addNotification(message);
+              // Show desktop notification
+              showDesktopNotification('Player Change', message);
             }
           }
         }));
@@ -1009,15 +1080,7 @@
       }
     }
 
-    function isParisTomorrow(unixSeconds) {
-      const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
-      const [ty, tm, td] = fmt.format(new Date()).split('-').map(Number);
-      const [my, mm, md] = fmt.format(new Date(unixSeconds * 1000)).split('-').map(Number);
-      const today = new Date(ty, tm - 1, td);
-      const match = new Date(my, mm - 1, md);
-      return (match - today) / (1000 * 60 * 60 * 24) === 1;
-    }
-
+    // Initial load
     checkForUpdate();
     setInterval(checkForUpdate, 4000);
   </script>
