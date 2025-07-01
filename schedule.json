@@ -1,0 +1,2970 @@
+{
+  "Centre": [
+    {
+      "id": "LS137",
+      "court": "Centre",
+      "typeLabel": "Ladies' Singles",
+      "home": "B. Krejcikova",
+      "away": "A. Eala",
+      "playersA": [
+        {
+          "name": "B. Krejcikova",
+          "country": "CZE"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Eala",
+          "country": "PHI"
+        }
+      ],
+      "seedA": "17",
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 118,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "30",
+          "away": "30"
+        },
+        "sets": {
+          "home": [
+            "3",
+            "6",
+            "3"
+          ],
+          "away": [
+            "6",
+            "2",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS148",
+      "court": "Centre",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. Rinderknech",
+      "away": "A. Zverev",
+      "playersA": [
+        {
+          "name": "A. Rinderknech",
+          "country": "FRA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Zverev",
+          "country": "GER"
+        }
+      ],
+      "seedA": null,
+      "seedB": "3",
+      "status": "interrupted",
+      "startTime": null,
+      "endTime": null,
+      "duration": 121,
+      "notBefore": null,
+      "notBeforeAEST": "23:30",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "0",
+          "away": "0"
+        },
+        "sets": {
+          "home": [
+            "7",
+            "6",
+            "0"
+          ],
+          "away": [
+            "6",
+            "7",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS132",
+      "court": "Centre",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. Muller",
+      "away": "N. Djokovic",
+      "playersA": [
+        {
+          "name": "A. Muller",
+          "country": "FRA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "N. Djokovic",
+          "country": "SRB"
+        }
+      ],
+      "seedA": null,
+      "seedB": "6",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "LS164",
+      "court": "Centre",
+      "typeLabel": "Ladies' Singles",
+      "home": "D. Yastremska",
+      "away": "C. Gauff",
+      "playersA": [
+        {
+          "name": "D. Yastremska",
+          "country": "UKR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "C. Gauff",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": "2",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "No.1 Court": [
+    {
+      "id": "MS101",
+      "court": "No.1 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. Sinner",
+      "away": "L. Nardi",
+      "playersA": [
+        {
+          "name": "J. Sinner",
+          "country": "ITA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "L. Nardi",
+          "country": "ITA"
+        }
+      ],
+      "seedA": "1",
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 108,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6",
+            "6"
+          ],
+          "away": [
+            "4",
+            "3",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS133",
+      "court": "No.1 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "T. Fritz",
+      "away": "G. Mpetshi Perricard",
+      "playersA": [
+        {
+          "name": "T. Fritz",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "G. Mpetshi Perricard",
+          "country": "FRA"
+        }
+      ],
+      "seedA": "5",
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 186,
+      "notBefore": null,
+      "notBeforeAEST": "23:30",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "40",
+          "away": "15"
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6",
+            "6",
+            "7",
+            "2"
+          ],
+          "away": [
+            "7",
+            "7",
+            "4",
+            "6",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS140",
+      "court": "No.1 Court",
+      "typeLabel": "Ladies' Singles",
+      "home": "P. Kvitova",
+      "away": "E. Navarro",
+      "playersA": [
+        {
+          "name": "P. Kvitova",
+          "country": "CZE"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "E. Navarro",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": "10",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "MS117",
+      "court": "No.1 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. Draper",
+      "away": "S. Baez",
+      "playersA": [
+        {
+          "name": "J. Draper",
+          "country": "GBR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "S. Baez",
+          "country": "ARG"
+        }
+      ],
+      "seedA": "4",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "No.2 Court": [
+    {
+      "id": "LS148",
+      "court": "No.2 Court",
+      "typeLabel": "Ladies' Singles",
+      "home": "E. Cocciaretto",
+      "away": "J. Pegula",
+      "playersA": [
+        {
+          "name": "E. Cocciaretto",
+          "country": "ITA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "J. Pegula",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": "3",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 58,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6"
+          ],
+          "away": [
+            "2",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS116",
+      "court": "No.2 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "N. Basilashvili",
+      "away": "L. Musetti",
+      "playersA": [
+        {
+          "name": "N. Basilashvili",
+          "country": "GEO"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "L. Musetti",
+          "country": "ITA"
+        }
+      ],
+      "seedA": null,
+      "seedB": "7",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 145,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "4",
+            "7",
+            "6"
+          ],
+          "away": [
+            "2",
+            "6",
+            "5",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS149",
+      "court": "No.2 Court",
+      "typeLabel": "Ladies' Singles",
+      "home": "I. Swiatek",
+      "away": "P. Kudermetova",
+      "playersA": [
+        {
+          "name": "I. Swiatek",
+          "country": "POL"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "P. Kudermetova",
+          "country": ""
+        }
+      ],
+      "seedA": "8",
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 11,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "0",
+          "away": "0"
+        },
+        "sets": {
+          "home": [
+            "2"
+          ],
+          "away": [
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS109",
+      "court": "No.2 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "B. Shelton",
+      "away": "A. Bolt",
+      "playersA": [
+        {
+          "name": "B. Shelton",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Bolt",
+          "country": "AUS"
+        }
+      ],
+      "seedA": "10",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "No.3 Court": [
+    {
+      "id": "MS108",
+      "court": "No.3 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. Monday",
+      "away": "T. Paul",
+      "playersA": [
+        {
+          "name": "J. Monday",
+          "country": "GBR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "T. Paul",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": "13",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 103,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "4",
+            "4",
+            "2"
+          ],
+          "away": [
+            "6",
+            "6",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS132",
+      "court": "No.3 Court",
+      "typeLabel": "Ladies' Singles",
+      "home": "K. Siniakova",
+      "away": "Q. Zheng",
+      "playersA": [
+        {
+          "name": "K. Siniakova",
+          "country": "CZE"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "Q. Zheng",
+          "country": "CHN"
+        }
+      ],
+      "seedA": null,
+      "seedB": "5",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 145,
+      "notBefore": null,
+      "notBeforeAEST": "21:30",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "7",
+            "4",
+            "6"
+          ],
+          "away": [
+            "5",
+            "6",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS133",
+      "court": "No.3 Court",
+      "typeLabel": "Ladies' Singles",
+      "home": "M. Andreeva",
+      "away": "M. Sherif",
+      "playersA": [
+        {
+          "name": "M. Andreeva",
+          "country": ""
+        }
+      ],
+      "playersB": [
+        {
+          "name": "M. Sherif",
+          "country": "EGY"
+        }
+      ],
+      "seedA": "7",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "MS105",
+      "court": "No.3 Court",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "G. Dimitrov",
+      "away": "Y. Nishioka",
+      "playersA": [
+        {
+          "name": "G. Dimitrov",
+          "country": "BUL"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "Y. Nishioka",
+          "country": "JPN"
+        }
+      ],
+      "seedA": "19",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "LS156",
+      "court": "No.3 Court",
+      "typeLabel": "Ladies' Singles",
+      "home": "E. Avanesyan",
+      "away": "E. Rybakina",
+      "playersA": [
+        {
+          "name": "E. Avanesyan",
+          "country": "ARM"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "E. Rybakina",
+          "country": "KAZ"
+        }
+      ],
+      "seedA": null,
+      "seedB": "11",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 12": [
+    {
+      "id": "LS153",
+      "court": "Court 12",
+      "typeLabel": "Ladies' Singles",
+      "home": "C. Tauson",
+      "away": "H. Watson",
+      "playersA": [
+        {
+          "name": "C. Tauson",
+          "country": "DEN"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "H. Watson",
+          "country": "GBR"
+        }
+      ],
+      "seedA": "23",
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 128,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "2",
+            "6",
+            "6"
+          ],
+          "away": [
+            "6",
+            "4",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS135",
+      "court": "Court 12",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "M. Arnaldi",
+      "away": "B. van de Zandschulp",
+      "playersA": [
+        {
+          "name": "M. Arnaldi",
+          "country": "ITA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "B. van de Zandschulp",
+          "country": "NED"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 179,
+      "notBefore": null,
+      "notBeforeAEST": "21:30",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6",
+            "4"
+          ],
+          "away": [
+            "7",
+            "7",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS131",
+      "court": "Court 12",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "D. Evans",
+      "away": "J. Clarke",
+      "playersA": [
+        {
+          "name": "D. Evans",
+          "country": "GBR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "J. Clarke",
+          "country": "GBR"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 63,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "AD",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "2"
+          ],
+          "away": [
+            "1",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS112",
+      "court": "Court 12",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "G. Monfils",
+      "away": "U. Humbert",
+      "playersA": [
+        {
+          "name": "G. Monfils",
+          "country": "FRA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "U. Humbert",
+          "country": "FRA"
+        }
+      ],
+      "seedA": null,
+      "seedB": "18",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "LS161",
+      "court": "Court 12",
+      "typeLabel": "Ladies' Singles",
+      "home": "S. Kenin",
+      "away": "T. Townsend",
+      "playersA": [
+        {
+          "name": "S. Kenin",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "T. Townsend",
+          "country": "USA"
+        }
+      ],
+      "seedA": "28",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 18": [
+    {
+      "id": "MS125",
+      "court": "Court 18",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. de Minaur",
+      "away": "R. Carballes Baena",
+      "playersA": [
+        {
+          "name": "A. de Minaur",
+          "country": "AUS"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "R. Carballes Baena",
+          "country": "ESP"
+        }
+      ],
+      "seedA": "11",
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 145,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6",
+            "7"
+          ],
+          "away": [
+            "2",
+            "2",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS160",
+      "court": "Court 18",
+      "typeLabel": "Ladies' Singles",
+      "home": "M. Joint",
+      "away": "L. Samsonova",
+      "playersA": [
+        {
+          "name": "M. Joint",
+          "country": "AUS"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "L. Samsonova",
+          "country": ""
+        }
+      ],
+      "seedA": null,
+      "seedB": "19",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 70,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "3",
+            "2"
+          ],
+          "away": [
+            "6",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS150",
+      "court": "Court 18",
+      "typeLabel": "Ladies' Singles",
+      "home": "C. McNally",
+      "away": "J. Burrage",
+      "playersA": [
+        {
+          "name": "C. McNally",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "J. Burrage",
+          "country": "GBR"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 24,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "0",
+          "away": "0"
+        },
+        "sets": {
+          "home": [
+            "5"
+          ],
+          "away": [
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS124",
+      "court": "Court 18",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "H. Gaston",
+      "away": "J. Mensik",
+      "playersA": [
+        {
+          "name": "H. Gaston",
+          "country": "FRA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "J. Mensik",
+          "country": "CZE"
+        }
+      ],
+      "seedA": null,
+      "seedB": "15",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 4": [
+    {
+      "id": "MS129",
+      "court": "Court 4",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. Michelsen",
+      "away": "M. Kecmanovic",
+      "playersA": [
+        {
+          "name": "A. Michelsen",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "M. Kecmanovic",
+          "country": "SRB"
+        }
+      ],
+      "seedA": "30",
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 193,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "2",
+            "6",
+            "3",
+            "6",
+            "6"
+          ],
+          "away": [
+            "6",
+            "3",
+            "6",
+            "3",
+            "7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS143",
+      "court": "Court 4",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "S. Mochizuki",
+      "away": "G. Zeppieri",
+      "playersA": [
+        {
+          "name": "S. Mochizuki",
+          "country": "JPN"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "G. Zeppieri",
+          "country": "ITA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 193,
+      "notBefore": null,
+      "notBeforeAEST": "21:30",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "2",
+            "3",
+            "6",
+            "7",
+            "7"
+          ],
+          "away": [
+            "6",
+            "6",
+            "3",
+            "6",
+            "5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS151",
+      "court": "Court 4",
+      "typeLabel": "Ladies' Singles",
+      "home": "C. Osorio",
+      "away": "D. Collins",
+      "playersA": [
+        {
+          "name": "C. Osorio",
+          "country": "COL"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "D. Collins",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "0"
+          ],
+          "away": [
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS114",
+      "court": "Court 4",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. Shevchenko",
+      "away": "R. Opelka",
+      "playersA": [
+        {
+          "name": "A. Shevchenko",
+          "country": "KAZ"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "R. Opelka",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": "01:30",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 5": [
+    {
+      "id": "MS102",
+      "court": "Court 5",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "C. Tseng",
+      "away": "A. Vukic",
+      "playersA": [
+        {
+          "name": "C. Tseng",
+          "country": "TPE"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Vukic",
+          "country": "AUS"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 184,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "3",
+            "4",
+            "6",
+            "6"
+          ],
+          "away": [
+            "6",
+            "6",
+            "4",
+            "7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS134",
+      "court": "Court 5",
+      "typeLabel": "Ladies' Singles",
+      "home": "J. Teichmann",
+      "away": "L. Bronzetti",
+      "playersA": [
+        {
+          "name": "J. Teichmann",
+          "country": "SUI"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "L. Bronzetti",
+          "country": "ITA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 69,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "0",
+          "away": "15"
+        },
+        "sets": {
+          "home": [
+            "4",
+            "3"
+          ],
+          "away": [
+            "6",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS138",
+      "court": "Court 5",
+      "typeLabel": "Ladies' Singles",
+      "home": "C. Dolehide",
+      "away": "A. Rus",
+      "playersA": [
+        {
+          "name": "C. Dolehide",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Rus",
+          "country": "NED"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "MS110",
+      "court": "Court 5",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "R. Hijikata",
+      "away": "D. Goffin",
+      "playersA": [
+        {
+          "name": "R. Hijikata",
+          "country": "AUS"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "D. Goffin",
+          "country": "BEL"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 6": [
+    {
+      "id": "MS126",
+      "court": "Court 6",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. Cazaux",
+      "away": "A. Walton",
+      "playersA": [
+        {
+          "name": "A. Cazaux",
+          "country": "FRA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Walton",
+          "country": "AUS"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 254,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "7",
+            "4",
+            "6",
+            "6"
+          ],
+          "away": [
+            "3",
+            "6",
+            "6",
+            "7",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS127",
+      "court": "Court 6",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "Q. Halys",
+      "away": "A. Holmgren",
+      "playersA": [
+        {
+          "name": "Q. Halys",
+          "country": "FRA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Holmgren",
+          "country": "DEN"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 1,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "15",
+          "away": "30"
+        },
+        "sets": {
+          "home": [
+            "0"
+          ],
+          "away": [
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS139",
+      "court": "Court 6",
+      "typeLabel": "Ladies' Singles",
+      "home": "V. Kudermetova",
+      "away": "L. Zhu",
+      "playersA": [
+        {
+          "name": "V. Kudermetova",
+          "country": ""
+        }
+      ],
+      "playersB": [
+        {
+          "name": "L. Zhu",
+          "country": "CHN"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 7": [
+    {
+      "id": "LS143",
+      "court": "Court 7",
+      "typeLabel": "Ladies' Singles",
+      "home": "S. Lamens",
+      "away": "I. Jovic",
+      "playersA": [
+        {
+          "name": "S. Lamens",
+          "country": "NED"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "I. Jovic",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 72,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6"
+          ],
+          "away": [
+            "1",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS130",
+      "court": "Court 7",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. de Jong",
+      "away": "C. Eubanks",
+      "playersA": [
+        {
+          "name": "J. de Jong",
+          "country": "NED"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "C. Eubanks",
+          "country": "USA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 179,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "0",
+          "away": "0"
+        },
+        "sets": {
+          "home": [
+            "6",
+            "6",
+            "6",
+            "2"
+          ],
+          "away": [
+            "3",
+            "7",
+            "7",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS111",
+      "court": "Court 7",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "A. Kovacevic",
+      "away": "M. Fucsovics",
+      "playersA": [
+        {
+          "name": "A. Kovacevic",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "M. Fucsovics",
+          "country": "HUN"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 8": [
+    {
+      "id": "MS115",
+      "court": "Court 8",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. Faria",
+      "away": "L. Sonego",
+      "playersA": [
+        {
+          "name": "J. Faria",
+          "country": "POR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "L. Sonego",
+          "country": "ITA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 103,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "3",
+            "4",
+            "2"
+          ],
+          "away": [
+            "6",
+            "6",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS107",
+      "court": "Court 8",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "S. Ofner",
+      "away": "H. Medjedovic",
+      "playersA": [
+        {
+          "name": "S. Ofner",
+          "country": "AUT"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "H. Medjedovic",
+          "country": "SRB"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 87,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "7",
+            "3"
+          ],
+          "away": [
+            "6",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS155",
+      "court": "Court 8",
+      "typeLabel": "Ladies' Singles",
+      "home": "M. Sakkari",
+      "away": "A. Blinkova",
+      "playersA": [
+        {
+          "name": "M. Sakkari",
+          "country": "GRE"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Blinkova",
+          "country": ""
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 19,
+      "notBefore": null,
+      "notBeforeAEST": "00:10",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "40",
+          "away": "15"
+        },
+        "sets": {
+          "home": [
+            "4"
+          ],
+          "away": [
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS162",
+      "court": "Court 8",
+      "typeLabel": "Ladies' Singles",
+      "home": "J. Bouzas Maneiro",
+      "away": "E. Seidel",
+      "playersA": [
+        {
+          "name": "J. Bouzas Maneiro",
+          "country": "ESP"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "E. Seidel",
+          "country": "GER"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 9": [
+    {
+      "id": "LS158",
+      "court": "Court 9",
+      "typeLabel": "Ladies' Singles",
+      "home": "I. Begu",
+      "away": "K. Juvan",
+      "playersA": [
+        {
+          "name": "I. Begu",
+          "country": "ROU"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "K. Juvan",
+          "country": "SLO"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 124,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "7",
+            "1",
+            "6"
+          ],
+          "away": [
+            "6",
+            "6",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS142",
+      "court": "Court 9",
+      "typeLabel": "Ladies' Singles",
+      "home": "Z. Sonmez",
+      "away": "J. Cristian",
+      "playersA": [
+        {
+          "name": "Z. Sonmez",
+          "country": "TUR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "J. Cristian",
+          "country": "ROU"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 107,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "7",
+            "6"
+          ],
+          "away": [
+            "6",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS135",
+      "court": "Court 9",
+      "typeLabel": "Ladies' Singles",
+      "home": "H. Baptiste",
+      "away": "S. Cirstea",
+      "playersA": [
+        {
+          "name": "H. Baptiste",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "S. Cirstea",
+          "country": "ROU"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "15",
+          "away": "15"
+        },
+        "sets": {
+          "home": [
+            "0"
+          ],
+          "away": [
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS123",
+      "court": "Court 9",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "M. Giron",
+      "away": "C. Ugo Carabelli",
+      "playersA": [
+        {
+          "name": "M. Giron",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "C. Ugo Carabelli",
+          "country": "ARG"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 10": [
+    {
+      "id": "LS136",
+      "court": "Court 10",
+      "typeLabel": "Ladies' Singles",
+      "home": "V. Mboko",
+      "away": "M. Frech",
+      "playersA": [
+        {
+          "name": "V. Mboko",
+          "country": "CAN"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "M. Frech",
+          "country": "POL"
+        }
+      ],
+      "seedA": null,
+      "seedB": "25",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": "01:00",
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 11": [
+    {
+      "id": "MS119",
+      "court": "Court 11",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. McCabe",
+      "away": "F. Marozsan",
+      "playersA": [
+        {
+          "name": "J. McCabe",
+          "country": "AUS"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "F. Marozsan",
+          "country": "HUN"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 117,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "1",
+            "4",
+            "3"
+          ],
+          "away": [
+            "6",
+            "6",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS154",
+      "court": "Court 11",
+      "typeLabel": "Ladies' Singles",
+      "home": "A. Kalinskaya",
+      "away": "N. Stojanovic",
+      "playersA": [
+        {
+          "name": "A. Kalinskaya",
+          "country": ""
+        }
+      ],
+      "playersB": [
+        {
+          "name": "N. Stojanovic",
+          "country": "SRB"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 96,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "6",
+            "7"
+          ],
+          "away": [
+            "3",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS106",
+      "court": "Court 11",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "F. Comesana",
+      "away": "C. Moutet",
+      "playersA": [
+        {
+          "name": "F. Comesana",
+          "country": "ARG"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "C. Moutet",
+          "country": "FRA"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 13,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "30",
+          "away": "30"
+        },
+        "sets": {
+          "home": [
+            "2"
+          ],
+          "away": [
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS145",
+      "court": "Court 11",
+      "typeLabel": "Ladies' Singles",
+      "home": "M. Linette",
+      "away": "E. Jacquemot",
+      "playersA": [
+        {
+          "name": "M. Linette",
+          "country": "POL"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "E. Jacquemot",
+          "country": "FRA"
+        }
+      ],
+      "seedA": "27",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 14": [
+    {
+      "id": "LS157",
+      "court": "Court 14",
+      "typeLabel": "Ladies' Singles",
+      "home": "D. Kasatkina",
+      "away": "E. Arango",
+      "playersA": [
+        {
+          "name": "D. Kasatkina",
+          "country": "AUS"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "E. Arango",
+          "country": "COL"
+        }
+      ],
+      "seedA": "16",
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 98,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "7",
+            "6"
+          ],
+          "away": [
+            "5",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS120",
+      "court": "Court 14",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "J. Munar",
+      "away": "A. Bublik",
+      "playersA": [
+        {
+          "name": "J. Munar",
+          "country": "ESP"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Bublik",
+          "country": "KAZ"
+        }
+      ],
+      "seedA": null,
+      "seedB": "28",
+      "status": "unknown",
+      "startTime": null,
+      "endTime": null,
+      "duration": 154,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "0",
+          "away": "0"
+        },
+        "sets": {
+          "home": [
+            "6",
+            "3",
+            "4",
+            "5"
+          ],
+          "away": [
+            "4",
+            "6",
+            "6",
+            "5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS118",
+      "court": "Court 14",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "R. Collignon",
+      "away": "M. Cilic",
+      "playersA": [
+        {
+          "name": "R. Collignon",
+          "country": "BEL"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "M. Cilic",
+          "country": "CRO"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "LS163",
+      "court": "Court 14",
+      "typeLabel": "Ladies' Singles",
+      "home": "V. Azarenka",
+      "away": "A. Zakharova",
+      "playersA": [
+        {
+          "name": "V. Azarenka",
+          "country": ""
+        }
+      ],
+      "playersB": [
+        {
+          "name": "A. Zakharova",
+          "country": ""
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 15": [
+    {
+      "id": "LS147",
+      "court": "Court 15",
+      "typeLabel": "Ladies' Singles",
+      "home": "K. Volynets",
+      "away": "T. Maria",
+      "playersA": [
+        {
+          "name": "K. Volynets",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "T. Maria",
+          "country": "GER"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 156,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "3",
+            "7",
+            "6"
+          ],
+          "away": [
+            "6",
+            "6",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS141",
+      "court": "Court 15",
+      "typeLabel": "Ladies' Singles",
+      "home": "K. Muchova",
+      "away": "X. Wang",
+      "playersA": [
+        {
+          "name": "K. Muchova",
+          "country": "CZE"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "X. Wang",
+          "country": "CHN"
+        }
+      ],
+      "seedA": "15",
+      "seedB": null,
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 85,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "5",
+            "2"
+          ],
+          "away": [
+            "7",
+            "6"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS128",
+      "court": "Court 15",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "D. Dzumhur",
+      "away": "T. Machac",
+      "playersA": [
+        {
+          "name": "D. Dzumhur",
+          "country": "BIH"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "T. Machac",
+          "country": "CZE"
+        }
+      ],
+      "seedA": null,
+      "seedB": "21",
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "MS113",
+      "court": "Court 15",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "B. Nakashima",
+      "away": "Y. Bu",
+      "playersA": [
+        {
+          "name": "B. Nakashima",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "Y. Bu",
+          "country": "CHN"
+        }
+      ],
+      "seedA": "29",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 16": [
+    {
+      "id": "LS152",
+      "court": "Court 16",
+      "typeLabel": "Ladies' Singles",
+      "home": "V. Erjavec",
+      "away": "M. Kostyuk",
+      "playersA": [
+        {
+          "name": "V. Erjavec",
+          "country": "SLO"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "M. Kostyuk",
+          "country": "UKR"
+        }
+      ],
+      "seedA": null,
+      "seedB": "26",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 125,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "3",
+            "6",
+            "6"
+          ],
+          "away": [
+            "6",
+            "3",
+            "4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS103",
+      "court": "Court 16",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "P. Martinez",
+      "away": "G. Loffhagen",
+      "playersA": [
+        {
+          "name": "P. Martinez",
+          "country": "ESP"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "G. Loffhagen",
+          "country": "GBR"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "in_progress",
+      "startTime": null,
+      "endTime": null,
+      "duration": 126,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "15",
+          "away": "0"
+        },
+        "sets": {
+          "home": [
+            "2",
+            "6",
+            "6",
+            "0"
+          ],
+          "away": [
+            "6",
+            "2",
+            "4",
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS121",
+      "court": "Court 16",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "F. Cobolli",
+      "away": "B. Zhukayev",
+      "playersA": [
+        {
+          "name": "F. Cobolli",
+          "country": "ITA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "B. Zhukayev",
+          "country": "KAZ"
+        }
+      ],
+      "seedA": "22",
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    },
+    {
+      "id": "LS146",
+      "court": "Court 16",
+      "typeLabel": "Ladies' Singles",
+      "home": "A. Parks",
+      "away": "B. Bencic",
+      "playersA": [
+        {
+          "name": "A. Parks",
+          "country": "USA"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "B. Bencic",
+          "country": "SUI"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ],
+  "Court 17": [
+    {
+      "id": "LS144",
+      "court": "Court 17",
+      "typeLabel": "Ladies' Singles",
+      "home": "P. Hon",
+      "away": "E. Alexandrova",
+      "playersA": [
+        {
+          "name": "P. Hon",
+          "country": "AUS"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "E. Alexandrova",
+          "country": ""
+        }
+      ],
+      "seedA": null,
+      "seedB": "18",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 85,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "2",
+            "5"
+          ],
+          "away": [
+            "6",
+            "7"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS104",
+      "court": "Court 17",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "M. Navone",
+      "away": "D. Shapovalov",
+      "playersA": [
+        {
+          "name": "M. Navone",
+          "country": "ARG"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "D. Shapovalov",
+          "country": "CAN"
+        }
+      ],
+      "seedA": null,
+      "seedB": "27",
+      "status": "finished",
+      "startTime": null,
+      "endTime": null,
+      "duration": 148,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "3",
+            "6",
+            "6",
+            "6"
+          ],
+          "away": [
+            "6",
+            "4",
+            "1",
+            "4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "LS159",
+      "court": "Court 17",
+      "typeLabel": "Ladies' Singles",
+      "home": "Y. Starodubtseva",
+      "away": "F. Jones",
+      "playersA": [
+        {
+          "name": "Y. Starodubtseva",
+          "country": "UKR"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "F. Jones",
+          "country": "GBR"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [
+            "0"
+          ],
+          "away": [
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MS122",
+      "court": "Court 17",
+      "typeLabel": "Gentlemen's Singles",
+      "home": "T. Etcheverry",
+      "away": "J. Pinnington Jones",
+      "playersA": [
+        {
+          "name": "T. Etcheverry",
+          "country": "ARG"
+        }
+      ],
+      "playersB": [
+        {
+          "name": "J. Pinnington Jones",
+          "country": "GBR"
+        }
+      ],
+      "seedA": null,
+      "seedB": null,
+      "status": "not_started",
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "notBefore": null,
+      "notBeforeAEST": null,
+      "round": "R1",
+      "score": {
+        "current": {
+          "home": "",
+          "away": ""
+        },
+        "sets": {
+          "home": [],
+          "away": []
+        }
+      }
+    }
+  ]
+}
