@@ -168,8 +168,7 @@
                     Notify on ALL odd games &gt; 5 (7th, 9th, 11th, etc.) as "run 60s break"
                 </label>
                 <p style="color:#888; font-size:0.8em; margin-top:5px;">
-                    Note: 3rd and 5th games are always tracked. Set completions run "squeezeback". Match ends run "180s
-                    break".
+                    Note: 3rd and 5th games are always tracked. Set completions run "squeezeback". Match ends run "180s break".
                 </p>
             </div>
         </div>
@@ -187,7 +186,60 @@
         let selectedCourts = new Set(JSON.parse(localStorage.getItem('alertCourts') || '[]'));
         let selectorsInitialized = false;
 
-        // Permissions logic
+        // --- AUDIO: Single Synthesized "Ding" ---
+        function playDing() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+
+                osc.type = 'sine';
+                // Frequency 880Hz is a nice, bright A5 note
+                osc.frequency.setValueAtTime(880, ctx.currentTime); 
+                
+                // Creates a percussive "hit" that fades out (a ding)
+                gainNode.gain.setValueAtTime(0, ctx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+
+                osc.connect(gainNode);
+                gainNode.connect(ctx.destination);
+
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 1.2);
+            } catch (err) {
+                console.log("Audio ding failed (usually due to lack of user interaction first).", err);
+            }
+        }
+
+        // --- TAB FLASHING ---
+        let flashInterval = null;
+        let originalTitle = document.title;
+
+        function startFlashingTab(courtName) {
+            if (flashInterval) clearInterval(flashInterval);
+            let isOriginal = true;
+            flashInterval = setInterval(() => {
+                document.title = isOriginal ? `🚨 [${courtName}] BREAK! 🚨` : originalTitle;
+                isOriginal = !isOriginal;
+            }, 1000);
+        }
+
+        function stopFlashingTab() {
+            if (flashInterval) {
+                clearInterval(flashInterval);
+                flashInterval = null;
+                document.title = originalTitle;
+            }
+        }
+
+        // Stop flashing when user clicks back into the tab
+        window.addEventListener('focus', stopFlashingTab);
+
+        // --- PERMISSIONS LOGIC ---
         const permStatus = document.getElementById('perm-status');
         const enableBtn = document.getElementById('enable-notifications');
 
@@ -213,16 +265,24 @@
                     new Notification('System Ready', { body: 'You will now receive break alerts.' });
                 }
             });
+            // Play test ding to confirm sound works and unlock browser audio policy
+            playDing();
         });
 
-        // Logging & Notification Execution
-        function fireAlert(title, message) {
-            // 1. Desktop Notification
+        // --- LOGGING & NOTIFICATIONS ---
+        function fireAlert(title, court, message) {
+            // 1. Play Sound
+            playDing();
+
+            // 2. Flash Tab
+            startFlashingTab(court);
+
+            // 3. Desktop Notification
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification(title, { body: message, requireInteraction: true });
             }
 
-            // 2. UI Log
+            // 4. UI Log
             const logContainer = document.getElementById('notification-log');
             const emptyState = logContainer.querySelector('.empty-state');
             if (emptyState) emptyState.remove();
@@ -244,7 +304,7 @@
             }
         }
 
-        // Setup Court Checkboxes
+        // --- SETUP COURTS ---
         function initSelectors(courtNames) {
             const container = document.getElementById('court-selector');
             container.innerHTML = '';
@@ -287,7 +347,7 @@
             selectorsInitialized = true;
         }
 
-        // Core Polling Logic
+        // --- CORE POLLING LOGIC ---
         async function checkForUpdate() {
             try {
                 const res = await fetch(API_BASE, { cache: 'no-store' });
@@ -328,11 +388,15 @@
 
                             // 1. MATCH FINISHED -> 180s break
                             if (prev.status !== 'finished' && currentState.status === 'finished') {
-                                fireAlert(matchTitle, "run 180s break");
+                                fireAlert(matchTitle, court, "run 180s break");
                             }
-                            // 2. SET CONCLUDED -> squeezeback
-                            else if (currentState.status === 'in_progress' && currentState.setsLength > prev.setsLength) {
-                                fireAlert(matchTitle, "run squeezeback");
+                            // 2. SET CONCLUDED -> squeezeback (Fix: ensure prev.setsLength > 0 so it ignores first set start)
+                            else if (
+                                currentState.status === 'in_progress' && 
+                                prev.setsLength > 0 && 
+                                currentState.setsLength > prev.setsLength
+                            ) {
+                                fireAlert(matchTitle, court, "run squeezeback");
                             }
                             // 3. GAME COMPLETED -> 60s break check
                             else if (
@@ -344,7 +408,7 @@
                                 const isTargetOddGame = tg === 3 || tg === 5 || (allowAllOdd && tg > 5 && tg % 2 !== 0);
 
                                 if (isTargetOddGame) {
-                                    fireAlert(matchTitle, `run 60s break (Game ${tg})`);
+                                    fireAlert(matchTitle, court, `run 60s break (Game ${tg})`);
                                 }
                             }
                         }
