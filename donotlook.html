@@ -43,33 +43,118 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .controls-panel h3 {
-            margin-top: 0;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
-
-        .settings-row {
+        /* Collapsible Section Styling */
+        details.settings-row {
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid #333;
         }
 
+        details.settings-row summary {
+            cursor: pointer;
+            list-style: none;
+            outline: none;
+            user-select: none;
+        }
+
+        details.settings-row summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.settings-row summary h3 {
+            display: inline-block;
+            margin: 0;
+            font-size: 1.17em;
+            color: var(--text-color);
+        }
+
+        details.settings-row summary h3::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        details[open].settings-row summary h3::before {
+            transform: rotate(90deg);
+        }
+
+        .details-content {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .static-header {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+
+        .static-header h3 {
+            margin: 0 0 15px 0;
+        }
+
         #court-selector {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
 
-        label {
-            cursor: pointer;
+        .court-item {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.9em;
+            justify-content: space-between;
+            background: #2a2a2a;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            min-width: 140px;
         }
 
-        button {
+        .court-label-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .court-label-group label {
+            cursor: pointer;
+            margin: 0;
+            font-size: 0.95em;
+            user-select: none;
+        }
+
+        .court-label-group input[type="checkbox"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        .mute-btn {
+            background: none;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.1s;
+        }
+
+        .mute-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .mute-btn.active {
+            color: var(--accent);
+        }
+
+        .mute-btn.muted {
+            color: #ff4c4c;
+        }
+
+        button.standard-btn {
             background: #333;
             color: #fff;
             border: 1px solid #555;
@@ -80,18 +165,23 @@
             transition: background 0.2s;
         }
 
-        button:hover {
+        button.standard-btn:hover {
             background: #444;
         }
 
-        .btn-action {
-            background: var(--accent);
-            border: none;
-            font-weight: bold;
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 6px;
+            width: fit-content;
         }
 
-        .btn-action:hover {
-            background: #45a049;
+        input[type="range"] {
+            cursor: pointer;
+            accent-color: var(--accent);
         }
 
         #notification-log {
@@ -146,36 +236,44 @@
         <h1><i class="fas fa-satellite-dish"></i> Break Notifier</h1>
 
         <div class="controls-panel">
-            <h3>1. Permissions</h3>
-            <button id="enable-notifications" class="btn-action">
-                <i class="fas fa-bell"></i> Enable Desktop Notifications
-            </button>
-            <span id="perm-status" style="margin-left: 10px; color: #888;"></span>
 
-            <div class="settings-row">
-                <h3>2. Select Courts to Monitor</h3>
-                <div style="margin-bottom: 15px; gap: 10px; display: flex;">
-                    <button id="select-all">Select All</button>
-                    <button id="deselect-all">Deselect All</button>
+            <details class="settings-row" style="border-top: none; margin-top: 0; padding-top: 0;" open>
+                <summary>
+                    <h3>Select Courts to Monitor</h3>
+                </summary>
+                <div class="details-content">
+
+                    <div class="volume-control" style="margin-bottom: 15px;">
+                        <i class="fas fa-volume-down" style="color: #888;"></i>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5" title="Volume">
+                        <i class="fas fa-volume-up" style="color: #888;"></i>
+                    </div>
+
+                    <div style="margin-bottom: 15px; gap: 10px; display: flex;">
+                        <button id="select-all" class="standard-btn">Select All</button>
+                        <button id="deselect-all" class="standard-btn">Deselect All</button>
+                    </div>
+                    <div id="court-selector">Loading courts...</div>
                 </div>
-                <div id="court-selector">Loading courts...</div>
-            </div>
+            </details>
 
-            <div class="settings-row">
-                <h3>3. Notification Rules</h3>
-                <label>
+            <div class="static-header">
+                <h3>Notification Rules</h3>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
                     <input type="checkbox" id="odd-games-toggle">
                     Notify on ALL odd games &gt; 5 (7th, 9th, 11th, etc.) as "run 60s break"
                 </label>
                 <p style="color:#888; font-size:0.8em; margin-top:5px;">
-                    Note: 3rd and 5th games are always tracked. Set completions run "squeezeback". Match ends run "180s break".
+                    Note: 3rd and 5th games are always tracked. Set completions run "squeezeback". Match ends run "180s
+                    break".
                 </p>
             </div>
+
         </div>
 
         <h3>Recent Alerts</h3>
         <div id="notification-log">
-            <div class="empty-state">Waiting for events...</div>
+            <div class="empty-state">Waiting for events... (if you've recently refereshed, this will be empty)</div>
         </div>
     </div>
 
@@ -184,25 +282,41 @@
         let matchStates = {};
         let isFirstLoad = true;
         let selectedCourts = new Set(JSON.parse(localStorage.getItem('alertCourts') || '[]'));
-        let selectorsInitialized = false;
+        let mutedCourts = new Set(JSON.parse(localStorage.getItem('mutedCourts') || '[]'));
+        let knownCourts = new Set(); // Tracks courts we've already rendered
 
-        // --- AUDIO: Single Synthesized "Ding" ---
+        // --- VOLUME SETTINGS ---
+        const volumeSlider = document.getElementById('volume-slider');
+        const savedVolume = localStorage.getItem('dingVolume');
+
+        if (savedVolume !== null) {
+            volumeSlider.value = savedVolume;
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            localStorage.setItem('dingVolume', e.target.value);
+        });
+
+        volumeSlider.addEventListener('change', () => playDing());
+
+        // --- AUDIO ---
         function playDing() {
+            const vol = parseFloat(volumeSlider.value);
+            if (vol === 0) return;
+
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 if (!AudioContext) return;
-                
+
                 const ctx = new AudioContext();
                 const osc = ctx.createOscillator();
                 const gainNode = ctx.createGain();
 
                 osc.type = 'sine';
-                // Frequency 880Hz is a nice, bright A5 note
-                osc.frequency.setValueAtTime(880, ctx.currentTime); 
-                
-                // Creates a percussive "hit" that fades out (a ding)
+                osc.frequency.setValueAtTime(880, ctx.currentTime);
+
                 gainNode.gain.setValueAtTime(0, ctx.currentTime);
-                gainNode.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.01);
+                gainNode.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.01);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
 
                 osc.connect(gainNode);
@@ -211,7 +325,7 @@
                 osc.start(ctx.currentTime);
                 osc.stop(ctx.currentTime + 1.2);
             } catch (err) {
-                console.log("Audio ding failed (usually due to lack of user interaction first).", err);
+                console.log("Audio ding failed.", err);
             }
         }
 
@@ -223,7 +337,7 @@
             if (flashInterval) clearInterval(flashInterval);
             let isOriginal = true;
             flashInterval = setInterval(() => {
-                document.title = isOriginal ? `🚨 [${courtName}] BREAK! 🚨` : originalTitle;
+                document.title = isOriginal ? `[${courtName}] BREAK! ` : originalTitle;
                 isOriginal = !isOriginal;
             }, 1000);
         }
@@ -236,53 +350,21 @@
             }
         }
 
-        // Stop flashing when user clicks back into the tab
         window.addEventListener('focus', stopFlashingTab);
-
-        // --- PERMISSIONS LOGIC ---
-        const permStatus = document.getElementById('perm-status');
-        const enableBtn = document.getElementById('enable-notifications');
-
-        function updatePermStatus() {
-            if ('Notification' in window) {
-                if (Notification.permission === 'granted') {
-                    permStatus.textContent = '(Granted)';
-                    permStatus.style.color = '#4CAF50';
-                    enableBtn.style.display = 'none';
-                } else if (Notification.permission === 'denied') {
-                    permStatus.textContent = '(Denied - Check Browser Settings)';
-                    permStatus.style.color = '#ff4c4c';
-                }
-            }
-        }
-
-        updatePermStatus();
-
-        enableBtn.addEventListener('click', () => {
-            Notification.requestPermission().then(permission => {
-                updatePermStatus();
-                if (permission === 'granted') {
-                    new Notification('System Ready', { body: 'You will now receive break alerts.' });
-                }
-            });
-            // Play test ding to confirm sound works and unlock browser audio policy
-            playDing();
-        });
 
         // --- LOGGING & NOTIFICATIONS ---
         function fireAlert(title, court, message) {
-            // 1. Play Sound
-            playDing();
+            if (!mutedCourts.has(court)) {
+                playDing();
+            }
 
-            // 2. Flash Tab
             startFlashingTab(court);
 
-            // 3. Desktop Notification
+            // Optional fallback if user manually granted permissions in browser
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification(title, { body: message, requireInteraction: true });
             }
 
-            // 4. UI Log
             const logContainer = document.getElementById('notification-log');
             const emptyState = logContainer.querySelector('.empty-state');
             if (emptyState) emptyState.remove();
@@ -298,54 +380,97 @@
 
             logContainer.prepend(entry);
 
-            // Keep only last 50 logs
             while (logContainer.children.length > 50) {
                 logContainer.removeChild(logContainer.lastChild);
             }
         }
 
         // --- SETUP COURTS ---
-        function initSelectors(courtNames) {
+        function renderCourts(courtNames) {
             const container = document.getElementById('court-selector');
-            container.innerHTML = '';
 
-            if (isFirstLoad && selectedCourts.size === 0) {
-                selectedCourts = new Set(courtNames);
-                localStorage.setItem('alertCourts', JSON.stringify(Array.from(selectedCourts)));
-            }
+            // Clear "Loading..." text on first successful fetch
+            if (knownCourts.size === 0) container.innerHTML = '';
 
             courtNames.forEach(court => {
-                const label = document.createElement('label');
+                if (knownCourts.has(court)) return; // Skip if already rendered
+                knownCourts.add(court);
+
+                const courtDiv = document.createElement('div');
+                courtDiv.className = 'court-item';
+
+                // Explicitly link label and checkbox by ID to guarantee clicks work
+                const safeId = 'chk-' + court.replace(/\s+/g, '-');
+
+                const labelGroup = document.createElement('div');
+                labelGroup.className = 'court-label-group';
+
                 const input = document.createElement('input');
                 input.type = 'checkbox';
+                input.id = safeId;
                 input.value = court;
                 input.checked = selectedCourts.has(court);
 
-                input.onchange = () => {
-                    if (input.checked) selectedCourts.add(court);
-                    else selectedCourts.delete(court);
+                const label = document.createElement('label');
+                label.htmlFor = safeId;
+                label.textContent = court;
+
+                labelGroup.appendChild(input);
+                labelGroup.appendChild(label);
+
+                const muteBtn = document.createElement('button');
+                muteBtn.className = mutedCourts.has(court) ? 'mute-btn muted' : 'mute-btn active';
+                muteBtn.innerHTML = mutedCourts.has(court) ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+                muteBtn.title = mutedCourts.has(court) ? "Unmute this court" : "Mute this court";
+
+                muteBtn.style.display = input.checked ? 'block' : 'none';
+
+                input.addEventListener('change', () => {
+                    if (input.checked) {
+                        selectedCourts.add(court);
+                        muteBtn.style.display = 'block';
+                    } else {
+                        selectedCourts.delete(court);
+                        muteBtn.style.display = 'none';
+                    }
                     localStorage.setItem('alertCourts', JSON.stringify(Array.from(selectedCourts)));
+                });
+
+                muteBtn.onclick = () => {
+                    if (mutedCourts.has(court)) {
+                        mutedCourts.delete(court);
+                        muteBtn.className = 'mute-btn active';
+                        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        muteBtn.title = "Mute this court";
+                    } else {
+                        mutedCourts.add(court);
+                        muteBtn.className = 'mute-btn muted';
+                        muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                        muteBtn.title = "Unmute this court";
+                    }
+                    localStorage.setItem('mutedCourts', JSON.stringify(Array.from(mutedCourts)));
                 };
 
-                label.appendChild(input);
-                label.appendChild(document.createTextNode(court));
-                container.appendChild(label);
+                courtDiv.appendChild(labelGroup);
+                courtDiv.appendChild(muteBtn);
+                container.appendChild(courtDiv);
             });
-
-            document.getElementById('select-all').onclick = () => {
-                selectedCourts = new Set(courtNames);
-                localStorage.setItem('alertCourts', JSON.stringify(Array.from(selectedCourts)));
-                initSelectors(courtNames);
-            };
-
-            document.getElementById('deselect-all').onclick = () => {
-                selectedCourts.clear();
-                localStorage.setItem('alertCourts', JSON.stringify([]));
-                initSelectors(courtNames);
-            };
-
-            selectorsInitialized = true;
         }
+
+        // Select/Deselect All buttons
+        document.getElementById('select-all').onclick = () => {
+            const checkboxes = document.querySelectorAll('#court-selector input[type="checkbox"]');
+            checkboxes.forEach(chk => {
+                if (!chk.checked) chk.click(); // Programmatically click to trigger events
+            });
+        };
+
+        document.getElementById('deselect-all').onclick = () => {
+            const checkboxes = document.querySelectorAll('#court-selector input[type="checkbox"]');
+            checkboxes.forEach(chk => {
+                if (chk.checked) chk.click();
+            });
+        };
 
         // --- CORE POLLING LOGIC ---
         async function checkForUpdate() {
@@ -354,7 +479,18 @@
                 const data = await res.json();
 
                 const courtNames = Object.keys(data);
-                if (!selectorsInitialized) initSelectors(courtNames);
+
+                // Only try to render if the API actually returned courts
+                if (courtNames.length > 0) {
+                    if (isFirstLoad && selectedCourts.size === 0) {
+                        selectedCourts = new Set(courtNames);
+                        localStorage.setItem('alertCourts', JSON.stringify(Array.from(selectedCourts)));
+                    }
+                    renderCourts(courtNames);
+                    isFirstLoad = false;
+                } else if (knownCourts.size === 0) {
+                    document.getElementById('court-selector').innerHTML = 'Waiting for active courts...';
+                }
 
                 const allowAllOdd = document.getElementById('odd-games-toggle').checked;
 
@@ -365,7 +501,6 @@
                     matches.forEach(m => {
                         const stateId = m.id;
 
-                        // Calculate current match metrics safely
                         const setsHome = (m.score && m.score.sets && m.score.sets.home) ? m.score.sets.home : [];
                         const setsAway = (m.score && m.score.sets && m.score.sets.away) ? m.score.sets.away : [];
                         const setsLength = setsHome.length;
@@ -381,24 +516,20 @@
                             gamesInCurrentSet: gamesInCurrentSet
                         };
 
-                        // Evaluate state changes
                         if (!isFirstLoad && matchStates[stateId]) {
                             const prev = matchStates[stateId];
                             const matchTitle = `[${court}] ${m.home} vs ${m.away}`;
 
-                            // 1. MATCH FINISHED -> 180s break
                             if (prev.status !== 'finished' && currentState.status === 'finished') {
                                 fireAlert(matchTitle, court, "run 180s break");
                             }
-                            // 2. SET CONCLUDED -> squeezeback (Fix: ensure prev.setsLength > 0 so it ignores first set start)
                             else if (
-                                currentState.status === 'in_progress' && 
-                                prev.setsLength > 0 && 
+                                currentState.status === 'in_progress' &&
+                                prev.setsLength > 0 &&
                                 currentState.setsLength > prev.setsLength
                             ) {
                                 fireAlert(matchTitle, court, "run squeezeback");
                             }
-                            // 3. GAME COMPLETED -> 60s break check
                             else if (
                                 currentState.status === 'in_progress' &&
                                 currentState.setsLength === prev.setsLength &&
@@ -413,20 +544,17 @@
                             }
                         }
 
-                        // Save state for next tick
                         matchStates[stateId] = currentState;
                     });
                 });
-
-                isFirstLoad = false;
             } catch (err) {
                 console.error("Failed to fetch data", err);
             }
         }
 
-        // Initialize and run poll every 4 seconds
         checkForUpdate();
-        setInterval(checkForUpdate, 4000);
+        setInterval(checkForUpdate, 1000);
+
     </script>
 </body>
 
