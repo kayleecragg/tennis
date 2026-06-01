@@ -635,7 +635,7 @@
 <body class="dark font-lato">
     <div id="main-content">
         <div class="header-container">
-            <h1>checkerboard</h1>
+            <h1 id="main-title">checkerboard</h1>
             <div class="header-buttons">
                 <button id="settings-button" class="settings-button">
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -869,6 +869,9 @@
         let lastData = {};
         let selectorsInitialized = false;
         const notifications = [];
+        
+        // NEW: Boolean to track if we've successfully updated the header year
+        let titleYearUpdated = false;
 
         function addNotification(message) {
             const timestamp = Date.now();
@@ -1107,6 +1110,22 @@
             try {
                 const res = await fetch(API_BASE, { cache: 'no-store' });
                 const data = await res.json();
+                
+                // Update header with year logic
+                if (!titleYearUpdated) {
+                    const allMatches = Object.values(data).flat();
+                    // Find a match with an endTime 
+                    const matchWithDate = allMatches.find(m => m.endTime);
+                    if (matchWithDate) {
+                        const matchYear = new Date(matchWithDate.endTime).getFullYear();
+                        const mainTitle = document.getElementById('main-title');
+                        if (mainTitle) {
+                            mainTitle.textContent = `checkerboard - roland garros ${matchYear}`;
+                            titleYearUpdated = true;
+                        }
+                    }
+                }
+
                 const changed = new Set();
                 const oldById = {};
 
@@ -1146,7 +1165,7 @@
                 lastData = data;
                 if (!selectorsInitialized) initSelectors(Object.keys(data));
 
-                // Visual checkerboard remains entirely unaffected by notifications logic
+                // Visual checkerboard remains unaffected by notifications logic
                 render(filterData(data));
 
                 changed.forEach(c => {
