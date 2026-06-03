@@ -347,9 +347,33 @@
             border-radius: 12px;
             padding: 16px;
             flex: 1 1 300px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.2s ease, box-shadow 0.2s ease;
             background-color: #1f1f1f;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+            cursor: grab;
+            /* Indicates dragability */
+        }
+
+        .court:active {
+            cursor: grabbing;
+        }
+
+        /* Drag and Drop visual states */
+        .court.dragging {
+            opacity: 0.4;
+            transform: scale(0.98);
+            transition: none;
+            /* Immediate visual feedback */
+        }
+
+        .court.drag-over {
+            border: 2px dashed #888;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+        }
+
+        body.light .court.drag-over {
+            border-color: #666;
         }
 
         body.light .court {
@@ -377,6 +401,8 @@
             font-size: 1.1em;
             border-bottom: 1px solid #444;
             padding-bottom: 6px;
+            pointer-events: none;
+            /* Helps drag flow cleanly */
         }
 
         body.light .court h2 {
@@ -389,6 +415,8 @@
             border-radius: 8px;
             background: #2a2a2a;
             border: 1px solid #333;
+            pointer-events: none;
+            /* Pass drags cleanly through children */
         }
 
         body.light .match {
@@ -864,12 +892,21 @@
         // Court rendering logic
         const API_BASE = "https://rg-checkerboard.vercel.app/";
         const savedCourts = localStorage.getItem('selectedCourts');
+
+        // Retrieve our drag-and-drop ordered layout state
+        const savedCourtOrder = localStorage.getItem('courtOrder');
+        let courtOrder = savedCourtOrder ? JSON.parse(savedCourtOrder) : [];
+
         let selectedCourts = new Set(savedCourts ? JSON.parse(savedCourts) : []);
         const isFirstLoad = !savedCourts;
         let lastData = {};
         let selectorsInitialized = false;
         const notifications = [];
-        
+
+        // Important state blocks automatic re-rendering while user holds down mouse button
+        let isDragging = false;
+        let draggedCourtName = null;
+
         // NEW: Boolean to track if we've successfully updated the header year
         let titleYearUpdated = false;
 
@@ -955,12 +992,88 @@
         }
 
         function render(courts) {
+            // Guard clause: Do not re-render DOM layout while actively dragging
+            if (isDragging) return;
+
             const container = document.getElementById('schedule');
             container.innerHTML = '';
-            Object.entries(courts).forEach(([court, matches]) => {
+
+            // Enforce the saved court order when pushing layout elements
+            const orderedCourtNames = Object.keys(courts).sort((a, b) => {
+                let indexA = courtOrder.indexOf(a);
+                let indexB = courtOrder.indexOf(b);
+                if (indexA === -1) indexA = 9999;
+                if (indexB === -1) indexB = 9999;
+                return indexA - indexB;
+            });
+
+            orderedCourtNames.forEach(court => {
+                const matches = courts[court];
                 const div = document.createElement('div');
                 div.className = 'court';
                 div.dataset.court = court;
+                div.draggable = true; // Enables drag and drop natively
+
+                // --- Drag and Drop API Hooks ---
+                div.addEventListener('dragstart', (e) => {
+                    isDragging = true;
+                    draggedCourtName = court;
+                    e.dataTransfer.effectAllowed = 'move';
+                    setTimeout(() => div.classList.add('dragging'), 0);
+                });
+
+                div.addEventListener('dragend', () => {
+                    isDragging = false;
+                    draggedCourtName = null;
+                    div.classList.remove('dragging');
+                    document.querySelectorAll('.court').forEach(c => c.classList.remove('drag-over'));
+                    render(filterData(lastData)); // Immediately apply logic updates built up while dragging
+                });
+
+                div.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                div.addEventListener('dragenter', (e) => {
+                    e.preventDefault();
+                    if (draggedCourtName && draggedCourtName !== court) {
+                        div.classList.add('drag-over');
+                    }
+                });
+
+                div.addEventListener('dragleave', () => {
+                    div.classList.remove('drag-over');
+                });
+
+                div.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    div.classList.remove('drag-over');
+
+                    if (draggedCourtName && draggedCourtName !== court) {
+                        let currentOrder = Array.from(selectedCourts);
+
+                        // Re-merge known sorting rules
+                        if (courtOrder.length > 0) {
+                            const known = courtOrder.filter(c => selectedCourts.has(c));
+                            const unknown = currentOrder.filter(c => !known.includes(c));
+                            currentOrder = [...known, ...unknown];
+                        }
+
+                        const fromIndex = currentOrder.indexOf(draggedCourtName);
+                        const toIndex = currentOrder.indexOf(court);
+
+                        if (fromIndex !== -1 && toIndex !== -1) {
+                            // Extract the item and place it before target
+                            currentOrder.splice(fromIndex, 1);
+                            currentOrder.splice(toIndex, 0, draggedCourtName);
+
+                            courtOrder = currentOrder;
+                            localStorage.setItem('courtOrder', JSON.stringify(courtOrder));
+                        }
+                    }
+                });
+
                 div.innerHTML = `<h2>${court}</h2>`;
                 matches.forEach(m => {
                     const d = document.createElement('div');
@@ -1110,7 +1223,7 @@
             try {
                 const res = await fetch(API_BASE, { cache: 'no-store' });
                 const data = await res.json();
-                
+
                 // Update header with year logic
                 if (!titleYearUpdated) {
                     const allMatches = Object.values(data).flat();
@@ -1166,7 +1279,9 @@
                 if (!selectorsInitialized) initSelectors(Object.keys(data));
 
                 // Visual checkerboard remains unaffected by notifications logic
-                render(filterData(data));
+                if (!isDragging) {
+                    render(filterData(data));
+                }
 
                 changed.forEach(c => {
                     const el = document.querySelector(`.court[data-court="${c}"]`);
