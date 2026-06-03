@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Base styles */
         :root {
             --border-radius: 8px;
             --button: #2a2a2a;
@@ -35,7 +34,6 @@
 
         body.dark .match.interrupted {
             color: #d0aaff;
-            /* light purple for dark mode */
             font-weight: bold;
         }
 
@@ -46,7 +44,6 @@
 
         body.light .match.interrupted {
             color: #6b2fb3;
-            /* dark purple for light mode */
             font-weight: bold;
         }
 
@@ -58,7 +55,6 @@
             stroke: #333;
         }
 
-        /* Font classes */
         body.font-lato {
             font-family: 'Lato', sans-serif;
         }
@@ -67,7 +63,6 @@
             font-family: 'IBM Plex Mono', 'Noto Sans Mono', monospace;
         }
 
-        /* Settings panel styles */
         #settings-modal {
             display: none;
             position: fixed;
@@ -129,7 +124,6 @@
             font-size: 1.3rem;
         }
 
-        /* Custom switcher styles */
         .switcher-parent {
             display: flex;
             flex-direction: column;
@@ -199,7 +193,6 @@
             color: #666;
         }
 
-        /* Fixed header centering */
         .header-container {
             display: flex;
             flex-direction: column;
@@ -237,7 +230,6 @@
             height: 20px;
         }
 
-        /* Rest of existing styles... */
         h1 {
             text-align: center;
             font-weight: bold;
@@ -286,7 +278,6 @@
 
         body.light .match.live {
             color: #006400;
-            /* Darker green */
         }
 
         body.light .match.upcoming {
@@ -328,12 +319,10 @@
 
         body.dark .match.upcoming .status-box {
             color: #ffdd57;
-            /* yellow for dark mode */
         }
 
         body.light .match.upcoming .status-box {
             color: #a66c00;
-            /* brown for light mode */
         }
 
         #schedule {
@@ -347,9 +336,30 @@
             border-radius: 12px;
             padding: 16px;
             flex: 1 1 300px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.2s ease, box-shadow 0.2s ease;
             background-color: #1f1f1f;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+            cursor: grab;
+        }
+
+        .court:active {
+            cursor: grabbing;
+        }
+
+        .court.dragging {
+            opacity: 0.4;
+            transform: scale(0.98);
+            transition: none;
+        }
+
+        .court.drag-over {
+            border: 2px dashed #888;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+        }
+
+        body.light .court.drag-over {
+            border-color: #666;
         }
 
         body.light .court {
@@ -377,6 +387,7 @@
             font-size: 1.1em;
             border-bottom: 1px solid #444;
             padding-bottom: 6px;
+            pointer-events: none;
         }
 
         body.light .court h2 {
@@ -389,6 +400,7 @@
             border-radius: 8px;
             background: #2a2a2a;
             border: 1px solid #333;
+            pointer-events: none;
         }
 
         body.light .match {
@@ -529,7 +541,6 @@
             font-size: 1rem;
         }
 
-        /* NEW: Score table styles */
         .score-table {
             width: 100%;
             border-collapse: collapse;
@@ -582,7 +593,6 @@
             margin-left: 4px;
         }
 
-        /* Notification permission banner */
         .notification-banner {
             position: fixed;
             bottom: 20px;
@@ -625,7 +635,6 @@
             font-size: 1.2rem;
         }
 
-        /* Remove border from last set column when no current game */
         .score-table.no-current-game .set-score:last-child {
             border-right: none;
         }
@@ -635,7 +644,7 @@
 <body class="dark font-lato">
     <div id="main-content">
         <div class="header-container">
-            <h1 id="main-title">checkerboard - roland garros</h1>
+            <h1>checkerboard</h1>
             <div class="header-buttons">
                 <button id="settings-button" class="settings-button">
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -712,7 +721,7 @@
     </div>
 
     <script>
-        // Settings functionality
+        // Settings
         const settingsModal = document.getElementById('settings-modal');
         const settingsButton = document.getElementById('settings-button');
         const closeSettings = document.querySelector('.close-settings');
@@ -721,82 +730,42 @@
         const body = document.body;
         const settingsStatus = document.getElementById('settings-status');
 
-        // Load saved settings
         const savedTheme = localStorage.getItem('theme') || 'dark';
         const savedFont = localStorage.getItem('font') || 'lato';
 
-        // Apply saved settings
         body.classList.remove('light', 'dark', 'font-lato', 'font-monospace');
         body.classList.add(savedTheme, `font-${savedFont}`);
-
-        // Update active buttons
         document.querySelector(`[data-theme="${savedTheme}"]`).classList.add('active');
         document.querySelector(`[data-font="${savedFont}"]`).classList.add('active');
 
-        // Toggle settings modal
-        settingsButton.addEventListener('click', () => {
-            settingsModal.style.display = 'block';
-        });
+        settingsButton.addEventListener('click', () => { settingsModal.style.display = 'block'; });
+        closeSettings.addEventListener('click', () => { settingsModal.style.display = 'none'; });
+        window.addEventListener('click', (e) => { if (e.target === settingsModal) settingsModal.style.display = 'none'; });
 
-        closeSettings.addEventListener('click', () => {
-            settingsModal.style.display = 'none';
-        });
-
-        // Close modal when clicking outside content
-        window.addEventListener('click', (e) => {
-            if (e.target === settingsModal) {
-                settingsModal.style.display = 'none';
-            }
-        });
-
-        // Theme selection
         themeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const theme = button.dataset.theme;
-
-                // Remove active class from all buttons
                 themeButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
                 button.classList.add('active');
-
-                // Remove existing theme classes
                 body.classList.remove('light', 'dark');
-
-                // Handle auto theme
                 if (theme === 'auto') {
-                    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    body.classList.add(systemPrefersDark ? 'dark' : 'light');
+                    body.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                 } else {
                     body.classList.add(theme);
                 }
-
-                // Save to localStorage
                 localStorage.setItem('theme', theme);
-
-                // Show confirmation
                 showSettingsStatus(`theme set to ${theme} mode`);
             });
         });
 
-        // Font selection
         fontButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const font = button.dataset.font;
-
-                // Remove active class from all buttons
                 fontButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
                 button.classList.add('active');
-
-                // Remove existing font classes
                 body.classList.remove('font-lato', 'font-monospace');
-                // Add selected font class
                 body.classList.add(`font-${font}`);
-
-                // Save to localStorage
                 localStorage.setItem('font', font);
-
-                // Show confirmation
                 showSettingsStatus(`Font set to ${font}`);
             });
         });
@@ -814,72 +783,60 @@
             return code === "AUS" ? "🇦🇺 " : "";
         }
 
-        // Notification functionality
+        // Notifications
         const notificationBanner = document.getElementById('notification-banner');
         const enableNotificationsBtn = document.getElementById('enable-notifications');
         const closeBannerBtn = document.querySelector('.close-banner');
 
-        // Show notification banner if permission hasn't been requested
         if ('Notification' in window && Notification.permission === 'default') {
-            setTimeout(() => {
-                notificationBanner.style.display = 'flex';
-            }, 3000);
+            setTimeout(() => { notificationBanner.style.display = 'flex'; }, 3000);
         }
 
-        // Request notification permission
         enableNotificationsBtn.addEventListener('click', () => {
             Notification.requestPermission().then(permission => {
                 if (permission === 'granted') {
                     notificationBanner.style.display = 'none';
-                    // Show a test notification
                     showDesktopNotification('Notifications Enabled', 'You will now receive alerts about court and player changes!');
                 }
             });
         });
 
-        // Close notification banner
-        closeBannerBtn.addEventListener('click', () => {
-            notificationBanner.style.display = 'none';
-        });
+        closeBannerBtn.addEventListener('click', () => { notificationBanner.style.display = 'none'; });
 
-        // Function to show desktop notification
         function showDesktopNotification(title, body) {
             if ('Notification' in window && Notification.permission === 'granted') {
-                const options = {
+                const notification = new Notification(title, {
                     body: body,
                     icon: 'https://img.icons8.com/color/96/000000/tennis.png',
                     badge: 'https://img.icons8.com/color/96/000000/important-mail.png'
-                };
-
-                // Create notification
-                const notification = new Notification(title, options);
-
-                // Close notification after 5 seconds
-                setTimeout(() => {
-                    notification.close();
-                }, 5000);
+                });
+                setTimeout(() => { notification.close(); }, 5000);
             }
         }
 
-        // Court rendering logic
+        // Court rendering
         const API_BASE = "https://rg-checkerboard.vercel.app/";
         const savedCourts = localStorage.getItem('selectedCourts');
+
+        // Drag-and-drop order state
+        const savedCourtOrder = localStorage.getItem('courtOrder');
+        let courtOrder = savedCourtOrder ? JSON.parse(savedCourtOrder) : [];
+
         let selectedCourts = new Set(savedCourts ? JSON.parse(savedCourts) : []);
         const isFirstLoad = !savedCourts;
         let lastData = {};
         let selectorsInitialized = false;
         const notifications = [];
-        
-        // NEW: Boolean to track if we've successfully updated the header year
-        let titleYearUpdated = false;
+
+        // Guard: prevent re-renders during drag
+        let isDragging = false;
+        let draggedCourtName = null;
 
         function addNotification(message) {
             const timestamp = Date.now();
             notifications.push({ message, timestamp });
             const tenMinutesAgo = timestamp - 15 * 60 * 1000;
-            while (notifications.length && notifications[0].timestamp < tenMinutesAgo) {
-                notifications.shift();
-            }
+            while (notifications.length && notifications[0].timestamp < tenMinutesAgo) notifications.shift();
             document.getElementById('notifications').innerHTML = notifications
                 .slice(-10)
                 .map(n => `<div>${new Date(n.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}: ${n.message}</div>`)
@@ -890,16 +847,13 @@
         function showPopup(message) {
             if (!message) return;
             const popup = document.getElementById('popup-notification');
-            const content = document.getElementById('popup-content');
-            content.innerText = message;
+            document.getElementById('popup-content').innerText = message;
             popup.classList.remove('popup-hidden');
         }
 
         document.getElementById('popup-close').onclick = () => {
-            const popup = document.getElementById('popup-notification');
-            const content = document.getElementById('popup-content');
-            popup.classList.add('popup-hidden');
-            content.innerText = '';
+            document.getElementById('popup-notification').classList.add('popup-hidden');
+            document.getElementById('popup-content').innerText = '';
         };
 
         function initSelectors(courtNames) {
@@ -908,9 +862,7 @@
                 localStorage.setItem('selectedCourts', JSON.stringify(Array.from(selectedCourts)));
             }
             const container = document.getElementById('court-selector');
-            container.innerHTML = '<h3>select courts:</h3>' +
-                '<button id="select-all">select all</button>' +
-                '<button id="deselect-all">deselect all</button>';
+            container.innerHTML = '<h3>select courts:</h3><button id="select-all">select all</button><button id="deselect-all">deselect all</button>';
 
             document.getElementById('select-all').onclick = () => {
                 selectedCourts = new Set(courtNames);
@@ -955,12 +907,76 @@
         }
 
         function render(courts) {
+            // Block re-render while user is dragging
+            if (isDragging) return;
+
             const container = document.getElementById('schedule');
             container.innerHTML = '';
-            Object.entries(courts).forEach(([court, matches]) => {
+
+            // Sort courts by saved drag-and-drop order
+            const orderedCourtNames = Object.keys(courts).sort((a, b) => {
+                let ia = courtOrder.indexOf(a);
+                let ib = courtOrder.indexOf(b);
+                if (ia === -1) ia = 9999;
+                if (ib === -1) ib = 9999;
+                return ia - ib;
+            });
+
+            orderedCourtNames.forEach(court => {
+                const matches = courts[court];
                 const div = document.createElement('div');
                 div.className = 'court';
                 div.dataset.court = court;
+                div.draggable = true;
+
+                div.addEventListener('dragstart', (e) => {
+                    isDragging = true;
+                    draggedCourtName = court;
+                    e.dataTransfer.effectAllowed = 'move';
+                    setTimeout(() => div.classList.add('dragging'), 0);
+                });
+
+                div.addEventListener('dragend', () => {
+                    isDragging = false;
+                    draggedCourtName = null;
+                    div.classList.remove('dragging');
+                    document.querySelectorAll('.court').forEach(c => c.classList.remove('drag-over'));
+                    render(filterData(lastData));
+                });
+
+                div.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                div.addEventListener('dragenter', (e) => {
+                    e.preventDefault();
+                    if (draggedCourtName && draggedCourtName !== court) div.classList.add('drag-over');
+                });
+
+                div.addEventListener('dragleave', () => { div.classList.remove('drag-over'); });
+
+                div.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    div.classList.remove('drag-over');
+                    if (draggedCourtName && draggedCourtName !== court) {
+                        let currentOrder = Array.from(selectedCourts);
+                        if (courtOrder.length > 0) {
+                            const known = courtOrder.filter(c => selectedCourts.has(c));
+                            const unknown = currentOrder.filter(c => !known.includes(c));
+                            currentOrder = [...known, ...unknown];
+                        }
+                        const fromIndex = currentOrder.indexOf(draggedCourtName);
+                        const toIndex = currentOrder.indexOf(court);
+                        if (fromIndex !== -1 && toIndex !== -1) {
+                            currentOrder.splice(fromIndex, 1);
+                            currentOrder.splice(toIndex, 0, draggedCourtName);
+                            courtOrder = currentOrder;
+                            localStorage.setItem('courtOrder', JSON.stringify(courtOrder));
+                        }
+                    }
+                });
+
                 div.innerHTML = `<h2>${court}</h2>`;
                 matches.forEach(m => {
                     const d = document.createElement('div');
@@ -971,28 +987,17 @@
                     d.className = `match ${statusClass}`;
                     let txt = '';
 
-                    // Status box for in_progress, interrupted, and not_before
                     if ((m.status === 'in_progress') || (m.status === 'finished') && m.duration !== undefined) {
-                        // Convert duration to HH:MM format
                         if (m.duration / 60 >= 1) {
                             const hours = Math.floor(m.duration / 60);
                             const minutes = m.duration % 60;
-                            const durationStr = `${hours}h ${minutes.toString().padStart(2, '0')}m`;
-                            txt += `<div class="status-box">${durationStr}</div>`;
+                            txt += `<div class="status-box">${hours}h ${minutes.toString().padStart(2, '0')}m</div>`;
+                        } else {
+                            txt += `<div class="status-box">${(m.duration % 60).toString().padStart(2, '0')}m</div>`;
                         }
-                        else {
-                            const hours = Math.floor(m.duration / 60);
-                            const minutes = m.duration % 60;
-                            const durationStr = `${minutes.toString().padStart(2, '0')}m`;
-                            txt += `<div class="status-box">${durationStr}</div>`;
-                        }
-
-                    }
-                    else if (m.status === 'interrupted') {
+                    } else if (m.status === 'interrupted') {
                         txt += `<div class="status-box">interrupted</div>`;
-                    }
-
-                    else if (m.status === 'not_started' && m.notBeforeAEST) {
+                    } else if (m.status === 'not_started' && m.notBeforeAEST) {
                         txt += `<div class="status-box">Not before ${m.notBeforeAEST} AEST</div>`;
                     }
 
@@ -1001,63 +1006,28 @@
                         txt += `<div class="type-label">${m.typeLabel}${roundText}</div>`;
                     }
 
-                    // Format team with seed
-                    const formatTeam = (team, seed) => {
-                        return team.split(' / ').map(name => {
-                            return `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`;
-                        }).join(' / ');
-                    };
+                    const formatTeam = (team, seed) => team.split(' / ').map(name =>
+                        `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`
+                    ).join(' / ');
 
                     if (m.score) {
-                        // Determine if we should hide current game
                         const hideCurrentGame = ['finished', 'ended'].includes(m.status);
                         const tableClass = hideCurrentGame ? "score-table no-current-game" : "score-table";
-
                         const homeCountry = m.playersA[0]?.country;
                         const awayCountry = m.playersB[0]?.country;
-
-
                         txt += `<table class="${tableClass}">`;
-
-                        // Home player row
-                        txt += `<tr>`;
-                        txt += `
-              <td class="player-name">
-                ${countryFlag(homeCountry)}
-                ${formatTeam(m.home, m.seedA)}
-              </td>
-            `;
-                        m.score.sets.home.forEach(score => {
-                            txt += `<td class="set-score">${score}</td>`;
-                        });
-                        if (!hideCurrentGame) {
-                            txt += `<td class="current-game">${m.score.current.home}</td>`;
-                        }
+                        txt += `<tr><td class="player-name">${countryFlag(homeCountry)}${formatTeam(m.home, m.seedA)}</td>`;
+                        m.score.sets.home.forEach(s => { txt += `<td class="set-score">${s}</td>`; });
+                        if (!hideCurrentGame) txt += `<td class="current-game">${m.score.current.home}</td>`;
                         txt += `</tr>`;
-
-                        // Away player row
-                        txt += `<tr>`;
-                        txt += `
-              <td class="player-name">
-                ${countryFlag(awayCountry)}
-                ${formatTeam(m.away, m.seedB)}
-              </td>
-            `;
-                        m.score.sets.away.forEach(score => {
-                            txt += `<td class="set-score">${score}</td>`;
-                        });
-                        if (!hideCurrentGame) {
-                            txt += `<td class="current-game">${m.score.current.away}</td>`;
-                        }
-                        txt += `</tr>`;
-
-                        txt += `</table>`;
+                        txt += `<tr><td class="player-name">${countryFlag(awayCountry)}${formatTeam(m.away, m.seedB)}</td>`;
+                        m.score.sets.away.forEach(s => { txt += `<td class="set-score">${s}</td>`; });
+                        if (!hideCurrentGame) txt += `<td class="current-game">${m.score.current.away}</td>`;
+                        txt += `</tr></table>`;
                     }
 
                     if (m.status === 'finished' && m.endTime) {
-                        const endDate = new Date(m.endTime);
-                        const options = { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit' };
-                        const timeStr = endDate.toLocaleTimeString('en-AU', options);
+                        const timeStr = new Date(m.endTime).toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit' });
                         txt += `<div class="score-endtime">Ended at: ${timeStr} AEST</div>`;
                     }
 
@@ -1068,112 +1038,45 @@
             });
         }
 
-        // Helper to evaluate notification rules
-        function shouldNotify(m) {
-            const type = (m.typeLabel || '').toLowerCase();
-            const round = (m.round || '').toUpperCase();
-
-            const isJunior = type.includes('boys') || type.includes('girls') || type.includes('junior');
-            const isSingles = type.includes('singles');
-            const isDoubles = type.includes('doubles');
-            const isWheelchair = type.includes('wheelchair');
-
-            // Check if any player (A or B) has country 'AUS'
-            const hasAussie = (m.playersA || []).some(p => p.country === 'AUS') ||
-                (m.playersB || []).some(p => p.country === 'AUS');
-
-            // 1. Juniors filtering
-            if (isJunior) {
-                if (isSingles) {
-                    // Junior Singles: allow only SF and F
-                    if (!['SF', 'F'].includes(round)) return false;
-                }
-                if (isDoubles) {
-                    // Junior Doubles: allow only F
-                    if (round !== 'F') return false;
-                }
-            }
-
-            // 2. Wheelchair filtering
-            if (isWheelchair) {
-                // Must have an Aussie competing
-                if (!hasAussie) return false;
-                // Not before quarter finals (allow QF, SF, F)
-                if (!['QF', 'SF', 'F'].includes(round)) return false;
-            }
-
-            // 3. Allowed if it passed all suppression checks
-            return true;
-        }
-
         async function checkForUpdate() {
             try {
                 const res = await fetch(API_BASE, { cache: 'no-store' });
                 const data = await res.json();
-                
-                // NEW: Update header with year logic
-                if (!titleYearUpdated) {
-                    const allMatches = Object.values(data).flat();
-                    // Find a match with an endTime 
-                    const matchWithDate = allMatches.find(m => m.endTime);
-                    if (matchWithDate) {
-                        const matchYear = new Date(matchWithDate.endTime).getFullYear();
-                        const mainTitle = document.getElementById('main-title');
-                        if (mainTitle) {
-                            mainTitle.textContent = `checkerboard ${matchYear}`;
-                            titleYearUpdated = true;
-                        }
-                    }
-                }
-
                 const changed = new Set();
                 const oldById = {};
 
                 Object.entries(lastData).forEach(([c, ms]) => ms.forEach(m => oldById[m.id] = { ...m, court: c }));
-
                 Object.entries(data).forEach(([c, ms]) => ms.forEach(m => {
                     const p = oldById[m.id];
-                    if (!p) {
-                        changed.add(c);
-                    } else {
-                        // Determine if this match passes notification rules
-                        const notify = shouldNotify(m);
-
+                    if (!p) changed.add(c);
+                    else {
                         if (p.court !== c) {
-                            changed.add(p.court);
-                            changed.add(c);
-                            if (notify) {
-                                const message = `COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`;
-                                addNotification(message);
-                                showDesktopNotification('Court Change', message);
-                            }
+                            changed.add(p.court); changed.add(c);
+                            const msg = `COURT CHANGE: Match ${p.home} vs ${p.away} moved from ${p.court} to ${c}`;
+                            addNotification(msg);
+                            showDesktopNotification('Court Change', msg);
                         }
                         if (p.home !== m.home || p.away !== m.away) {
                             changed.add(c);
-                            if (notify) {
-                                const message = `PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`;
-                                addNotification(message);
-                                showDesktopNotification('Player Change', message);
-                            }
+                            const msg = `PLAYER CHANGE on ${c}: was ${p.home} vs ${p.away}, now ${m.home} vs ${m.away}`;
+                            addNotification(msg);
+                            showDesktopNotification('Player Change', msg);
                         }
                     }
                 }));
 
                 const newIds = new Set(Object.values(data).flat().map(m => m.id));
                 Object.entries(lastData).forEach(([c, ms]) => ms.forEach(m => { if (!newIds.has(m.id)) changed.add(c); }));
-
                 lastData = data;
+
                 if (!selectorsInitialized) initSelectors(Object.keys(data));
 
-                // Visual checkerboard remains entirely unaffected by notifications logic
-                render(filterData(data));
+                // Skip render if mid-drag
+                if (!isDragging) render(filterData(data));
 
                 changed.forEach(c => {
                     const el = document.querySelector(`.court[data-court="${c}"]`);
-                    if (el) {
-                        el.classList.add('flash');
-                        setTimeout(() => el.classList.remove('flash'), 1500);
-                    }
+                    if (el) { el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1500); }
                 });
             } catch (err) {
                 console.error(err);
@@ -1182,7 +1085,6 @@
             }
         }
 
-        // Initial load
         checkForUpdate();
         setInterval(checkForUpdate, 1500);
     </script>
