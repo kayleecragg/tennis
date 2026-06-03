@@ -1195,8 +1195,11 @@
             const hasAussie = (m.playersA || []).some(p => p.country === 'AUS') ||
                 (m.playersB || []).some(p => p.country === 'AUS');
 
-            // 1. Juniors filtering
+            // 1. Juniors filtering (including Junior Wheelchair)
             if (isJunior) {
+                // ONLY Junior Wheelchair requires an Australian player
+                if (isWheelchair && !hasAussie) return false;
+
                 if (isSingles) {
                     // Junior Singles: allow only SF and F
                     if (!['SF', 'F'].includes(round)) return false;
@@ -1207,11 +1210,9 @@
                 }
             }
 
-            // 2. Wheelchair filtering
+            // 2. Wheelchair filtering (General Wheelchair & Junior Wheelchair)
             if (isWheelchair) {
-                // Must have an Aussie competing
-                if (!hasAussie) return false;
-                // Not before quarter finals (allow QF, SF, F)
+                // Both regular and junior wheelchair must be QF, SF, or F
                 if (!['QF', 'SF', 'F'].includes(round)) return false;
             }
 
