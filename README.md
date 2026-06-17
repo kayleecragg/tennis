@@ -9,7 +9,7 @@ description of files:
 
 - index.html: main page
 - offline.html: static page to demonstrate what shows when connection to vercel api goes down
-- test.html: test page to demonstrate moving courts feature
+- test.html: test page to test new feature
 - schedule.json: static json to use for in between seasons so that vercel isn't getting called
 
 assets folder:
@@ -20,16 +20,15 @@ assets folder:
 
 ## how it works? 
 
-- msi checkerboard down since 2024
-- roland garros has an api but webpage browser cannot access because of CORS
+- msi checkerboard (for roland garros) down since 2024
+  - this checkerboard of mine is pretty much only applicable for roland garros since mis' checkerboard not working (rg not paying?)
+- roland garros has an api but webpage browser (this github page for example) cannot access because of CORS
 - vercel server made so that bypass CORS
-- vercel server queries https://www.rolandgarros.com/api/en-us/polling every time it is called by this web page (about every 1.5 seconds)
-- improvements made recently to increase interval check from like 20 seconds to 1.5 seconds (speed :sunglasses:)
+- vercel server queries https://www.rolandgarros.com/api/en-us/polling every time it is called by this web page
 
 ## result
 
-- new checkerboard :)
-- near instant updates to scoring
-- player change and court change notifications
 - court selections (so you only view courts that you want instead of all at once)
-- pretty colours
+- relatively instant updates to scoring
+- player change and court change notifications
+- pretty colours (yellow for not started, green for ongoing, red for finished, purple for interrupted)
