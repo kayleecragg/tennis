@@ -998,10 +998,17 @@
             const container = document.getElementById('schedule');
             container.innerHTML = '';
 
-            // Enforce the saved court order when pushing layout elements
-            const orderedCourtNames = Object.keys(courts).sort((a, b) => {
+            const apiKeyOrder = Object.keys(courts);
+
+            const orderedCourtNames = [...apiKeyOrder].sort((a, b) => {
                 let indexA = courtOrder.indexOf(a);
                 let indexB = courtOrder.indexOf(b);
+
+                // Both unknown to courtOrder → preserve API order
+                if (indexA === -1 && indexB === -1) {
+                    return apiKeyOrder.indexOf(a) - apiKeyOrder.indexOf(b);
+                }
+
                 if (indexA === -1) indexA = 9999;
                 if (indexB === -1) indexB = 9999;
                 return indexA - indexB;
