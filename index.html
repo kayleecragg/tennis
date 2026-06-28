@@ -992,7 +992,6 @@
         }
 
         function render(courts) {
-            // Guard clause: Do not re-render DOM layout while actively dragging
             if (isDragging) return;
 
             const container = document.getElementById('schedule');
@@ -1004,7 +1003,6 @@
                 let indexA = courtOrder.indexOf(a);
                 let indexB = courtOrder.indexOf(b);
 
-                // Both unknown to courtOrder → preserve API order
                 if (indexA === -1 && indexB === -1) {
                     return apiKeyOrder.indexOf(a) - apiKeyOrder.indexOf(b);
                 }
@@ -1019,9 +1017,8 @@
                 const div = document.createElement('div');
                 div.className = 'court';
                 div.dataset.court = court;
-                div.draggable = true; // Enables drag and drop natively
+                div.draggable = true;
 
-                // --- Drag and Drop API Hooks ---
                 div.addEventListener('dragstart', (e) => {
                     isDragging = true;
                     draggedCourtName = court;
@@ -1034,7 +1031,7 @@
                     draggedCourtName = null;
                     div.classList.remove('dragging');
                     document.querySelectorAll('.court').forEach(c => c.classList.remove('drag-over'));
-                    render(filterData(lastData)); // Immediately apply logic updates built up while dragging
+                    render(filterData(lastData));
                 });
 
                 div.addEventListener('dragover', (e) => {
@@ -1060,7 +1057,6 @@
                     if (draggedCourtName && draggedCourtName !== court) {
                         let currentOrder = Array.from(selectedCourts);
 
-                        // Re-merge known sorting rules
                         if (courtOrder.length > 0) {
                             const known = courtOrder.filter(c => selectedCourts.has(c));
                             const unknown = currentOrder.filter(c => !known.includes(c));
@@ -1071,7 +1067,6 @@
                         const toIndex = currentOrder.indexOf(court);
 
                         if (fromIndex !== -1 && toIndex !== -1) {
-                            // Extract the item and place it before target
                             currentOrder.splice(fromIndex, 1);
                             currentOrder.splice(toIndex, 0, draggedCourtName);
 
@@ -1091,28 +1086,21 @@
                     d.className = `match ${statusClass}`;
                     let txt = '';
 
-                    // Status box for in_progress, interrupted, and not_before
                     if ((m.status === 'in_progress') || (m.status === 'finished') && m.duration !== undefined) {
-                        // Convert duration to HH:MM format
                         if (m.duration / 60 >= 1) {
                             const hours = Math.floor(m.duration / 60);
                             const minutes = m.duration % 60;
                             const durationStr = `${hours}h ${minutes.toString().padStart(2, '0')}m`;
                             txt += `<div class="status-box">${durationStr}</div>`;
-                        }
-                        else {
+                        } else {
                             const hours = Math.floor(m.duration / 60);
                             const minutes = m.duration % 60;
                             const durationStr = `${minutes.toString().padStart(2, '0')}m`;
                             txt += `<div class="status-box">${durationStr}</div>`;
                         }
-
-                    }
-                    else if (m.status === 'interrupted') {
+                    } else if (m.status === 'interrupted') {
                         txt += `<div class="status-box">interrupted</div>`;
-                    }
-
-                    else if (m.status === 'not_started' && m.notBeforeAEST) {
+                    } else if (m.status === 'not_started' && m.notBeforeAEST) {
                         txt += `<div class="status-box">Not before ${m.notBeforeAEST} AEST</div>`;
                     }
 
@@ -1121,7 +1109,6 @@
                         txt += `<div class="type-label">${m.typeLabel}${roundText}</div>`;
                     }
 
-                    // Format team with seed
                     const formatTeam = (team, seed) => {
                         return team.split(' / ').map(name => {
                             return `${name}${seed ? `<span class="seed">(${seed})</span>` : ''}`;
@@ -1129,24 +1116,16 @@
                     };
 
                     if (m.score) {
-                        // Determine if we should hide current game
                         const hideCurrentGame = ['finished', 'ended'].includes(m.status);
                         const tableClass = hideCurrentGame ? "score-table no-current-game" : "score-table";
 
                         const homeCountry = m.playersA[0]?.country;
                         const awayCountry = m.playersB[0]?.country;
 
-
                         txt += `<table class="${tableClass}">`;
 
-                        // Home player row
                         txt += `<tr>`;
-                        txt += `
-              <td class="player-name">
-                ${countryFlag(homeCountry)}
-                ${formatTeam(m.home, m.seedA)}
-              </td>
-            `;
+                        txt += `<td class="player-name">${countryFlag(homeCountry)}${formatTeam(m.home, m.seedA)}</td>`;
                         m.score.sets.home.forEach(score => {
                             txt += `<td class="set-score">${score}</td>`;
                         });
@@ -1155,14 +1134,8 @@
                         }
                         txt += `</tr>`;
 
-                        // Away player row
                         txt += `<tr>`;
-                        txt += `
-              <td class="player-name">
-                ${countryFlag(awayCountry)}
-                ${formatTeam(m.away, m.seedB)}
-              </td>
-            `;
+                        txt += `<td class="player-name">${countryFlag(awayCountry)}${formatTeam(m.away, m.seedB)}</td>`;
                         m.score.sets.away.forEach(score => {
                             txt += `<td class="set-score">${score}</td>`;
                         });
