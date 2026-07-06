@@ -657,6 +657,38 @@
         .score-table.no-current-game .set-score:last-child {
             border-right: none;
         }
+
+        /* NEW: Court Status Banner Styles */
+        .court-status-banner {
+            margin-top: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .court-status-banner.closed {
+            background-color: #a74540;
+            color: white;
+        }
+
+        .court-status-banner.on-hold {
+            background-color: #2c405a;
+            color: #93b5d9;
+        }
+
+        body.light .court-status-banner.closed {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        body.light .court-status-banner.on-hold {
+            background-color: #3498db;
+            color: white;
+        }
     </style>
 </head>
 
@@ -1188,6 +1220,23 @@
                     d.innerHTML = txt;
                     div.appendChild(d);
                 });
+                
+                // --- NEW: Add Court Status Banner ---
+                if (matches.length > 0) {
+                    const courtStatus = matches[0].courtStatus;
+                    if (courtStatus === 'closed') {
+                        const banner = document.createElement('div');
+                        banner.className = 'court-status-banner closed';
+                        banner.innerText = 'COURT CLOSED';
+                        div.appendChild(banner);
+                    } else if (courtStatus === 'on_hold') {
+                        const banner = document.createElement('div');
+                        banner.className = 'court-status-banner on-hold';
+                        banner.innerText = 'COURT ON HOLD';
+                        div.appendChild(banner);
+                    }
+                }
+
                 container.appendChild(div);
             });
         }
