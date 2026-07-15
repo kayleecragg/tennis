@@ -286,7 +286,6 @@
 
         body.light .match.live {
             color: #006400;
-            /* Darker green */
         }
 
         body.light .match.upcoming {
@@ -333,7 +332,6 @@
 
         body.light .match.upcoming .status-box {
             color: #a66c00;
-            /* brown for light mode */
         }
 
         #schedule {
@@ -922,7 +920,7 @@
         }
 
         // Court rendering logic
-        const API_BASE = "https://wimbledon-checkerboard.vercel.app/";
+        const API_BASE = "schedule.json";
         const savedCourts = localStorage.getItem('selectedCourts');
 
         // Retrieve our drag-and-drop ordered layout state
